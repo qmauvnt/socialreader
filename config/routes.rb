@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  root to: "static_pages#home"
+  devise_for :users
+  root "static_pages#home"
+  namespace :admin do
+    root "static_pages#home"
+  end
 end
