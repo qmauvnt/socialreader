@@ -16,3 +16,11 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+$('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  })
+;

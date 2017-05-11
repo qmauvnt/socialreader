@@ -219,7 +219,7 @@ DEPENDENCIES
   mongoid
   puma (~> 3.7)
   rails (~> 5.1.0)
-  sass-rails (~> 5.0)
+  sass-rails
   selenium-webdriver
   semantic-ui-sass!
   spring
