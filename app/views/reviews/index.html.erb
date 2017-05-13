@@ -1,0 +1,20 @@
+<%provide(:title,"Reviews")%>
+<div class="ui internally  grid">
+  <div class="row">
+    <div class="three wide column">
+      <img>
+    </div>
+
+    <div class="ten wide column">
+    <%= paginate(@reviews) %>
+      <%= render @reviews %>
+      <%= paginate(@reviews) %>
+    </div>
+
+    <div class="three wide column">
+      <img>
+    </div>
+  </div>
+</div>
+
+

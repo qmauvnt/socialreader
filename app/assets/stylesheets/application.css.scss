@@ -12,8 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require owl.carousel
+ *= require owl.theme
  */
-$font-url: 'http://fonts.useso.com/css?family=Lato:400,700,400italic,700italic&subset=latin';
+$font-url: "https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300";
 @import "semantic-ui";
 @import "variables";
 @import "main";

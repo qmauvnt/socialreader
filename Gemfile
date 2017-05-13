@@ -18,6 +18,10 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'devise', git: 'https://github.com/gogovan/devise.git', branch: 'rails-5.1'
+gem 'owlcarousel-rails'
+gem "mongoid-paperclip"
+gem 'kaminari'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,0 +1,40 @@
+<div class="ui menu">
+<a class="ui item inverted red button" href="<%=root_path%>">SOCIALREADER
+  </a>
+  <a class="item">
+    Reviews
+  </a>
+  <% if user_signed_in? %>
+  <a class="item" id="profile">
+    Profile
+  </a>
+  <%end%>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path, method: :delete do%>
+        <div class="item">
+          <div class="ui button">Sign out</div>
+        </div>
+        <%end %>
+      <% else %>
+        <%= link_to new_user_registration_path do%>
+        <div class="item">
+          <div class="ui primary button">Sign up</div>
+        </div>
+        <% end %>
+        <%= link_to new_user_session_path do%>
+        <div class="item">
+          <div class="ui button">Log-in</div>
+        </div>
+        <% end %>
+      <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/profile_modal' if user_signed_in? %>

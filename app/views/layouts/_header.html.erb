@@ -1,9 +1,5 @@
-<div class="ui menu">
-  <a class="item" href="<%=root_path%>">
-    Home
-  </a>
-  <a class="item">
-    Messages
+<div class="ui fixed menu">
+<a class="ui item inverted red button" href="<%=root_path%>">SOCIALREADER
   </a>
   <div class="right menu">
     <div class="item">
@@ -13,22 +9,22 @@
       </div>
     </div>
       <% if user_signed_in? %>
-        <%= link_to destroy_user_session_path, method: :delete do%>
-        <div class="item">
-          <div class="ui negative button">Sign out</div>
-        </div>
-        <%end %>
+        <a class=" launch icon item" id="push">
+          <i class="content icon"></i>
+        </a>
       <% else %>
         <%= link_to new_user_registration_path do%>
         <div class="item">
-          <div class="ui positive button">Sign up</div>
+          <div class="ui primary button">Sign up</div>
         </div>
         <% end %>
         <%= link_to new_user_session_path do%>
         <div class="item">
-          <div class="ui primary button">Log-in</div>
+          <div class="ui button">Log-in</div>
         </div>
         <% end %>
       <% end %>
   </div>
 </div>
+
+<%= render 'layouts/profile_modal' if user_signed_in? %>

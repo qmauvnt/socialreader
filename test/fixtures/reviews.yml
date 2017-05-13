@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyString
+  host: MyString
+  type: 
+  url: MyString
+  tstamp: 2017-05-11 16:03:49
+
+two:
+  id: MyString
+  host: MyString
+  type: 
+  url: MyString
+  tstamp: 2017-05-11 16:03:49

@@ -1,10 +1,29 @@
 <% provide(:title, "Home") %>
-<div class="ui icon message">
-  <i class="notched circle loading icon"></i>
-  <div class="content">
-    <div class="header">
-      Just one second
+<div class="owl-carousel" style="background-color: black">
+  <div> Your Content </div>
+  <div> Your Content </div>
+  <div> Your Content </div>
+  <div> Your Content </div>
+  <div> Your Content </div>
+  <div> Your Content </div>
+  <div> Your Content </div>
+</div>
+
+<div class="ui internally  grid">
+  <div class="row">
+
+    <div class="three wide column">
+      <img>
     </div>
-    <p>We're fetching that content for you.</p>
+
+    <div class="ten wide column">
+      <%= render @best_reviews %>
+    </div>
+
+    <div class="three wide column">
+      <img>
+    </div>
   </div>
 </div>
+
+

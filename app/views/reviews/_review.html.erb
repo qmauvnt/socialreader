@@ -1,0 +1,34 @@
+<div class="ui items internally celled grid" style="padding-top:20px">
+    <a class="ui large <%=type_label_color(review.type)%> ribbon label"><%=review.type.upcase%></a>
+      <div class="raised item">
+    <div class="content">
+      <a class="header" href="<%= review_path(review)%>"><%=review.title%></a>
+       <div class="meta">
+      </div>
+      <div class="meta">
+        <span><%=review.host%></span>
+      </div>
+      <div class="description">
+       <div class="ui right floated small statistic">
+          <div class="value">
+            <%= review.popular%>
+          </div>
+          <div class="label">
+            Views
+          </div>
+        </div>
+        <span><%=review.review[0..400]%>...</span>
+      </div>
+      <div class="extra">
+      <span class="ui tag label">Tags</span>
+        <div class="ui celled horizontal list">
+          <%=review.tag.each do |tag|%>
+            <div class="item"><%=tag%></div>
+          <% end %>
+        </div>
+      <div class="ui bottom right attached label">tinhte.vn</div>
+      </div>
+
+    </div>
+  </div>
+</div>
