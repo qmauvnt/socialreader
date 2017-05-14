@@ -1,0 +1,9 @@
+<%provide(:title, "Search results")%>
+
+<% if @search.reviews.present?%>
+  <%= render @search.reviews %>
+<%else%>
+  <div class="ui bottom attached tab segment active">
+    No result has the term "<%=@search.keyword%>"
+  </div>
+<%end%>

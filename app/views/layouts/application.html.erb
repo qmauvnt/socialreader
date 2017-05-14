@@ -11,31 +11,20 @@
   <body>
     <%= render "layouts/header"%>
     <%=render "layouts/right_side_bar"%>
-    <div class="pusher">
-    <%= semantic_flash %>
-    <%= yield %>
-    <%=render'layouts/footer'%>
+    <div class="ui internally grid pusher" id="body">
+      <div class="row" >
+        <div class="four wide column" >
+          <%= render 'layouts/side_bar'%>
+        </div>
+        <div class="eleven wide column">
+        <%= semantic_flash %>
+        <%= yield %>
+        </div>
+        <div class="one wide column">
+        </div>
+        <%=render'layouts/footer'%>
+      </div>
     </div>
   </body>
 </html>
 
-<script type="text/javascript">
-  $('.message .close')
-  .on('click', function() {
-    $(this)
-      .closest('.message')
-      .transition('fade')
-    ;
-  })
-;
-  var span= document.getElementById("profile")
-  span.onclick = function(){
-    $('.ui.modal').modal('show');
-  }
-  $(".owl-carousel").owlCarousel();
-
-  var sidebar= document.getElementById("push")
-  sidebar.onclick=function(){
-    $('.ui.labeled.icon.sidebar').sidebar('toggle')
-  }
-</script>

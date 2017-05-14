@@ -1,18 +1,24 @@
-<div class="ui right demo vertical inverted sidebar labeled icon menu">
-  <a class="item">
-    <i class="home icon"></i>
-    Home
-  </a>
-  <a class="item">
-    <i class="block layout icon"></i>
-    Reviews
-  </a>
-  <a class="item" id="profile">
-    Profile
-  </a>
-  <%= link_to destroy_user_session_path, method: :delete do%>
-    <div class="item fixed bottom">
-      <div class="ui red button">Sign out</div>
+<div class="ui sticky vertical menu" style=" padding-top:50px width: 900px !important; height: 900px !important; left: -1000px;">
+  <div class="item">
+    <a class="ui animated red fade button" href="<%=new_search_path%>" >
+      <div class="visible content">Advanced search</div>
+      <div class="hidden content">
+      <i class="search icon"></i>
+      </div>
+    </a>
+  </div>
+  <div class="item">
+    <%= link_to "Home", root_path %>
+    <div class="menu">
+      <a class="active item">Search</a>
+      <a class="item">Add</a>
+      <a class="item">Remove</a>
     </div>
-  <%end %>
+  </div>
+  <a class="item">
+    <i class="grid layout icon"></i> Browse
+  </a>
+  <a class="item">
+    Messages
+  </a>
 </div>
