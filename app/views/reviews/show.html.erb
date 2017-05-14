@@ -1,40 +1,9 @@
 <% provide(:title, "Review")%>
-<style type="text/css">
-  #container {
-}
 
-#container img {
-   max-height:100%;
-   max-width:100%;
-}
-#container iframe {
-  max-width: 100%    !important;
-  max-height: 100%   !important;
-}
-}
-
-#container .ytp-thumbnail-overlay-image {
-  width: 100%
-}
-
-</style>
-
-<div class="ui internally  grid">
-  <div class="row">
-    <div class="three wide column">
-      <img>
-    </div>
-
-    <div class="twelve wide column" id="container" >
+    <div id="container">
     <%= @review.title %><br>
 <%= @review.published_date%><br>
 <%= @review.url%><br>
 <%= @review.popular%><br>
       <%=@review.content.html_safe%>
     </div>
-
-    <div class="one wide column">
-      <img>
-    </div>
-  </div>
-</div>

@@ -21,7 +21,8 @@ gem 'devise', git: 'https://github.com/gogovan/devise.git', branch: 'rails-5.1'
 gem 'owlcarousel-rails'
 gem "mongoid-paperclip"
 gem 'kaminari'
-
+gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
