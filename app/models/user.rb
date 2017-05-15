@@ -2,7 +2,6 @@ class User
   include Mongoid::Document
   include Mongoid::Paperclip
 
-  has_many :comments
   has_many :reviews
 
   devise :database_authenticatable, :registerable,

@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+  before_action :sign_in_required
   def new
     @search=Search.new
   end
@@ -15,5 +16,12 @@ class SearchesController < ApplicationController
   private
   def search_params
     params.require(:search).permit(:keyword,:just_title,:host,:published_after,:ordered_by_date)
+  end
+  def sign_in_required
+    unless user_signed_in?
+      flash[:danger] = "You have to log in "
+    byebug
+      redirect_to new_user_session_path
+    end
   end
 end

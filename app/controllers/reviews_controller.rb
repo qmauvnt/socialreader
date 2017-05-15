@@ -22,5 +22,6 @@ class ReviewsController < ApplicationController
   def show
     @review=Review.find(params[:id])
     @comment=@review.comments.build
+    @train_text=TrainText.new
   end
 end

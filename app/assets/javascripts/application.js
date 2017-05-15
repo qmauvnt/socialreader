@@ -34,16 +34,11 @@ $( document ).on('turbolinks:load', function() {
 
   $(".owl-carousel").owlCarousel();
 
-  var sidebar= document.getElementById("push")
-  sidebar.onclick=function(){
-    $('.ui.labeled.icon.sidebar').sidebar('toggle')
-  }
-
   $('.ui.sticky').sticky({
     context: '#body',
     pushing: true
   })
 ;
-  $('.menu .item').tab();
+
   $('.ui.checkbox').checkbox();
 })

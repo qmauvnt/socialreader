@@ -1,0 +1,19 @@
+<% provide(:title,"Train texts")%>
+<% if @train_texts.any?%>
+  <table class="ui very basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Review</th>
+        <th>Re-classify</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @train_texts%>
+    </tbody>
+  </table>
+<% else %>
+  <div class="ui message">
+    There is no unchecked train texts from users
+  </div>
+<% end %>

@@ -10,13 +10,14 @@
   <div class="item">
     <%= link_to "Home", root_path %>
     <div class="menu">
-      <a class="active item">Search</a>
+      <a class="item" href="<%= reviews_path %>">Reviews</a>
       <a class="item">Add</a>
       <a class="item">Remove</a>
     </div>
   </div>
-  <a class="item">
-    <i class="grid layout icon"></i> Browse
+  <a class="item" id="profile">
+    <i class="spy icon"></i>
+    Profile
   </a>
   <a class="item">
     Messages

@@ -1,0 +1,56 @@
+<% provide(:title,"Train data")%>
+<% if @train_reviews.any?%>
+
+<div class="ui top attached tabular menu">
+  <a class="item " data-tab="first">Statistic</a>
+  <a class="item active" data-tab="second">Index</a>
+</div>
+<div class="ui bottom attached tab segment " data-tab="first">
+  <table class="ui very basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Number of reviews</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%Review::TYPES.each do |cat|%>
+      <tr>
+          <td>
+            <span class="ui <%=type_label_color(cat)%> basic label">
+      <%= cat.capitalize%>
+    </span>
+          </td>
+          <td>
+            <%=@train_reviews.by_type(cat).count%>
+          </td>
+      </tr>
+      <%end%>
+    </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th><%=@train_reviews.count%></th>
+        </tr>
+      </tfoot>
+  </table>
+</div>
+<div class="ui bottom attached tab segment active" data-tab="second">
+  <table class="ui very basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Review</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @train_reviews%>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <div class="ui message">
+    There is no train reviews
+  </div>
+<% end %>

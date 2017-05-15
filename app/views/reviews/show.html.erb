@@ -1,12 +1,30 @@
 <% provide(:title, "Review")%>
-
-<div class="ui main text container" id="container">
-  <h1 class="ui header"></h1>
+<div id="container">
+  <h1 class="ui header"><%= @review.title %></h1>
   <div class="ui message page grid">
-      <h1 class="ui big header"><%= @review.title %></h1>
         <p> Posted at <%= @review.published_date.strftime("%d/%m/%Y")%> @ <%=link_to "#{@review.host}",reviews_path(forum: "#{@review.host}")%>.<br>
-        This review has been viewed <%= @review.popular%> times and classified into <%= @review.type.capitalize%> category by <%=link_to "SocialReader", root_path%>.<br>
+        This review has been viewed <%= @review.popular%> times and classified into
+        <span class="ui <%=type_label_color(@review.type)%> basic label">
+      <%= @review.type.capitalize%>
+    </span>   category by <%=link_to "SocialReader", root_path%>.<br>
         You can also view <%= link_to "source review", @review.url%>.</p>
+          <div class="ui form">
+          <%= form_for @train_text do |f|  %>
+          <div class="three fields">
+          <div class="field">
+            <label>This review is about:</label>
+          </div>
+          <div class="field">
+            <%= f.select(:category,Review::TYPES-[@review.type], class: "ui dropdown")  %>
+          </div>
+          <div class="field">
+            <%= f.submit "Re-classify", class:"ui red button"%>
+          </div>
+            <%= f.hidden_field :_id,value: @review.id%>
+            <%= f.hidden_field :review,value: @review.review%>
+          </div>
+          </div>
+          <% end %>
   </div>
   <p><%=@review.content.html_safe%></p>
   <span class="ui tag label">Tags</span>
@@ -16,6 +34,9 @@
     <% end %>
   </div>
 </div>
+
+
+<% if user_signed_in? %>
   <div class="ui comments">
     <h3 class="ui dividing header">Comments (<%=@review.comments.count%>)</h3>
     <%= render @review.comments %>
@@ -23,9 +44,10 @@
     <div class="ui reply form" style="padding-top:20px">
       <div class="field">
         <%= f.text_area :content%>
+        <%= f.hidden_field :user_id, value: current_user.id %>
       </div>
         <%= f.submit "Add reply", class: "ui green button"%>
     </div>
     <% end %>
   </div>
-</div>
+  <%end %>

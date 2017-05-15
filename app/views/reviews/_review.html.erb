@@ -20,9 +20,11 @@
       <div class="extra">
       <span class="ui tag label">Tags</span>
         <div class="ui celled horizontal list">
+          <% unless review.tag.nil?%>
           <%=review.tag.each do |tag|%>
             <div class="item"><%=link_to "#{tag}", reviews_path(:tag=> tag)%></div>
           <% end %>
+          <%end%>
         </div>
       <div class="ui bottom right attached label">
       <%=link_to "#{review.host}", reviews_path(forum: "#{review.host}")%></div>

@@ -9,9 +9,22 @@
   </head>
 
   <body>
+    <% if current_user&&current_user.admin? %>
+      <%= render "layouts/admin_header"%>
+    <div class="ui internally grid" id="body">
+      <div class="row" >
+      <div class="two wide column" >
+      </div>
+      <div class="twelve wide column" >
+        <%= yield %>
+      </div>
+      <div class="two wide column" >
+      </div>
+      </div>
+    </div>
+    <%else%>
     <%= render "layouts/header"%>
-    <%=render "layouts/right_side_bar"%>
-    <div class="ui internally grid pusher" id="body">
+    <div class="ui internally grid" id="body">
       <div class="row" >
         <div class="four wide column" >
           <%= render 'layouts/side_bar'%>
@@ -25,6 +38,10 @@
         <%=render'layouts/footer'%>
       </div>
     </div>
+    <%end%>
   </body>
 </html>
 
+<script type="text/javascript">
+    $('.menu .item').tab();
+</script>

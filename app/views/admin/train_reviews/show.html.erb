@@ -1,0 +1,41 @@
+<%provide(:title,"Train review")%>
+
+<div id="container">
+  <h1 class="ui header"><%= @review.title %></h1>
+  <div class="ui message page grid">
+        <p> Posted at <%= @review.published_date.strftime("%d/%m/%Y")%> @ <%=link_to "#{@review.host}",reviews_path(forum: "#{@review.host}")%>.<br>
+        This review has been viewed <%= @review.popular%> times and classified into
+        <span class="ui <%=type_label_color(@review.type)%> basic label">
+      <%= @review.type.capitalize%>
+    </span>   category by <%=link_to "SocialReader", root_path%>.<br>
+        You can also view <%= link_to "source review", @review.url%>.</p>
+          <div class="row">
+          <div class="eight wide column">
+          <div class="field">
+            <label>This review has been re-trained by admin as:</label>
+          </div>
+          <div class="field">
+              <span class="ui <%=type_label_color(@train_review.category)%> basic label">
+                <%= @train_review.category.capitalize%>
+              </span>
+          </div>
+          </div>
+          <div class="eight wide column">
+            <div class="row">
+            Train data added @ <%=@train_review.created_at.strftime("%d/%m/%Y")%>
+            <div class="eight wide column">
+          <%= link_to "Delete", admin_train_review_path, method: :delete, data:{confirmation: "Are you sure?"}, class: "ui red button"%>
+            </div>
+          </div>
+            </div>
+          </div>
+          </div>
+  </div>
+  <p><%=@review.content.html_safe%></p>
+  <span class="ui tag label">Tags</span>
+  <div class="ui celled horizontal list">
+    <% @review.tag.each do |tag|%>
+      <div class="item"><%=link_to "#{tag}", reviews_path(:tag=> tag)%></div>
+    <% end %>
+  </div>
+</div>
