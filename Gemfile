@@ -23,6 +23,8 @@ gem "mongoid-paperclip"
 gem 'kaminari'
 gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
 gem 'jquery-ui-rails'
+gem 'nbayes'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

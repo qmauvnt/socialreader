@@ -1,5 +1,4 @@
 class Review
-  store_in collection: "reviews", database: "socialreader_development"
 
   include Mongoid::Document
   include Mongoid::Timestamps::Short
@@ -8,6 +7,8 @@ class Review
   TYPES=["general","camera","design","misc","perform"]
   HOSTS=["tinhte.vn","mainguyen.vn"]
 
+  belongs_to :user
+  embeds_many :comments
 
   field :id, type: String
   field :title, type: String

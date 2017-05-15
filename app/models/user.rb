@@ -1,10 +1,15 @@
 class User
   include Mongoid::Document
   include Mongoid::Paperclip
+
+  has_many :comments
+  has_many :reviews
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   has_mongoid_attached_file :avatar, :style => {:default_url => "images/missing.png"}
+
   field :name, type: String
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
