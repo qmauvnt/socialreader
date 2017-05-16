@@ -1,0 +1,71 @@
+<tr>
+  <td><%=train.created_at.strftime("%d/%m/%Y")%><br>
+    <%if train.classified%>
+      CLASSIFIED
+    <%else%>
+      DID NOT CLASSIFY
+    <%end%>
+  </td>
+   <td>
+    <%Review::TYPES.each do |cat|%>
+      <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span> <%=train.train_data[cat]%><br>
+    <%end%>
+    Total <%=train.train_data['total']%>
+  </td>
+  <td>
+    <%Review::TYPES.each do |cat|%>
+      <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span> <%=train.test_data[cat]%><br>
+    <%end%>
+    Total <%=train.test_data['total']%>
+  </td>
+  <td>
+    <%Review::TYPES.each do |cat|%>
+      <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span> <%=train.precision[cat]%><br>
+    <%end%>
+  </td>
+  <td>
+    <%Review::TYPES.each do |cat|%>
+      <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span> <%=train.recall[cat]%><br>
+    <%end%>
+  </td>
+  <td>
+    <%Review::TYPES.each do |cat|%>
+      <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span> <%=train.fmeasure[cat]%><br>
+    <%end%>
+  </td>
+  <td>
+    <table class="ui center aligned very basic collapsing celled table">
+  <thead>
+    <tr>
+      <% Review::TYPES.each do |cat|%>
+      <th style="color: <%=type_label_color(cat)%>"><%=cat%></th>
+      <% end %>
+      <th><- classified as</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%y=0%>
+    <%Review::TYPES.each do |cat|%>
+      <tr>
+        <%0.upto(4) do |x|%>
+        <td><%=@lastest_train.matrix[x][y]%></td>
+        <%end%>
+        <%y+=1%>
+        <td style="color: <%=type_label_color(cat)%>"><%=cat%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+  </td>
+  <td><%=train.accuracy%>%</td>
+</tr>

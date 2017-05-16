@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "static_pages#home"
+    resources :trains
     resources :train_texts
     resources :train_reviews
     resources :test_reviews

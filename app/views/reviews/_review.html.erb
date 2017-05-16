@@ -1,6 +1,6 @@
 <div class="ui items internally celled grid" style="padding-top:20px">
-    <a class="ui large <%=type_label_color(review.type)%> ribbon label" >
-    <%=review.type.upcase%></a>
+    <a class="ui large <%=type_label_color(review.category)%> ribbon label" >
+    <%=review.category.upcase%></a>
       <div class="raised item">
     <div class="content">
       <a class="header" href="<%= review_path(review)%>"><%=review.title%></a>

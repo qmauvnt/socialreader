@@ -1,0 +1,58 @@
+      <table class="ui collapsing table">
+        <h2>Train data set</h2>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Number of reviews</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%Review::TYPES.each do |cat|%>
+          <tr>
+              <td>
+                <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span>
+              </td>
+              <td>
+                <%=TrainReview.by_type(cat).count%>
+              </td>
+          </tr>
+          <%end%>
+        </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th><%=TrainReview.count%></th>
+            </tr>
+          </tfoot>
+      </table>
+      <table class="ui collapsing table">
+        <h2>Test data set</h2>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Number of reviews</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%Review::TYPES.each do |cat|%>
+          <tr>
+              <td>
+                <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span>
+              </td>
+              <td>
+                <%=TestReview.by_type(cat).count%>
+              </td>
+          </tr>
+          <%end%>
+        </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th><%=TestReview.count%></th>
+            </tr>
+          </tfoot>
+      </table>

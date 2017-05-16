@@ -1,0 +1,58 @@
+      <table class="ui collapsing table">
+        <h2>Train data set</h2>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Number of reviews</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%Review::TYPES.each do |cat|%>
+          <tr>
+              <td>
+                <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span>
+              </td>
+              <td>
+                <%=@lastest_train.train_data[cat]%>
+              </td>
+          </tr>
+          <%end%>
+        </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th><%=@lastest_train.train_data['total']%></th>
+            </tr>
+          </tfoot>
+      </table>
+      <table class="ui collapsing table">
+        <h2>Test data set</h2>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Number of reviews</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%Review::TYPES.each do |cat|%>
+          <tr>
+              <td>
+                <span class="ui <%=type_label_color(cat)%> basic label">
+          <%= cat.capitalize%>
+        </span>
+              </td>
+              <td>
+                <%=@lastest_train.test_data[cat]%>
+              </td>
+          </tr>
+          <%end%>
+        </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th><%=@lastest_train.test_data['total']%></th>
+            </tr>
+          </tfoot>
+      </table>
