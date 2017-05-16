@@ -1,37 +1,14 @@
 <%provide(:title,"Reviews")%>
-<div class="ui top attached tabular menu">
-  <% if @general.present?%>
-    <a class="item active" data-tab="<%=Review::CATEGORIES.first%>">
-    <%=Review::CATEGORIES.first.capitalize%>
-    </a>
-  <% end %>
-  <%Review::CATEGORIES[1..-1].each do |cat|%>
-    <% if instance_variable_get("@#{cat}").present?%>
-     <a class="item" data-tab="<%=cat%>"><%=cat.capitaliTYPEze%></a>
-    <% end %>
-  <%end%>
-</div>
-
-<% if @general.present?%>
-  <div class="ui bottom attached tab segment active" data-tab="<%=Review::CATEGORIES.first%>">
-    <%= paginate(@general) %>
-    <%=render @general %>
-    <%= paginate(@general) %>
-  </div>
-<% end %>
-
-<%Review::CATEGORIES[1..-1].each do |cat|%>
-  <% if instance_variable_get("@#{cat}").present?%>
-    <div class="ui bottom attached tab segment" data-tab="<%=cat%>">
-      <%= render instance_variable_get("@#{cat}")%>
-    </div>
-  <% end %>
-<%end%>
-<% unless @reviews.present?||@general.present?||@camera.present?||@design.present?||@misc.present?||@perform.present?%>
+<% if @reviews.present?%>
+  <%= paginate(@reviews) %>
+    <%= render @reviews %>
+  <%= paginate(@reviews) %>
+<%else%>
   <div class="ui bottom attached tab segment active">
     No result has the term "<%=params[:search]%>". Go to <%= link_to "Advanced search", new_search_path%> for more informations
   </div>
-<% end %>
+<%end%>
+
 <script type="text/javascript">
     $('.ui.sticky').sticky({
     context: '#body',

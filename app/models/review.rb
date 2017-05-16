@@ -2,7 +2,6 @@ class Review
 
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Search
 
   CATEGORIES=["general","camera","design","misc","perform"]
   HOSTS=["tinhte.vn","mainguyen.vn"]
@@ -13,7 +12,7 @@ class Review
   field :id, type: String
   field :title, type: String
   field :host, type: String
-  field :category, type: String
+  field :category, type: String, default: "unclassified"
   field :url,type: String
   field :published_date, type: DateTime
   field :tag, type: Array
@@ -21,20 +20,14 @@ class Review
   field :review, type: String
   field :content, type: String
 
-  default_scope -> { order_by(:popular => 'desc') }
+  scope :ordered_by_popular, -> { order_by(:popular => 'desc') }
   scope :by_category, ->(category) { where(:category => category)}
   scope :by_host, ->(host) {where(:host => host)}
-  scope :general, ->{ where("category"=>"general")}
-  scope :camera, ->{ where("category"=>"camera")}
-  scope :design, ->{ where("category"=>"design")}
-  scope :misc, ->{ where("category"=>"misc")}
-  scope :perform, ->{ where("category"=>"perform")}
   scope :after_date, ->(date) { where(:published_date.gte => date)}
   scope :ordered_by_date, -> { order(published_date: :desc) }
   scope :by_tag, ->(tag) { where(:tag => tag)}
 
   scope :tinhte, ->{ where("host": "tinhte.vn") }
-  search_in :title, :review, :tag
 
   class << self
   def by_host_category host,category
@@ -43,7 +36,7 @@ class Review
 
   def search search
     if search
-      Review.full_text_search(search)
+      Review.text_search(search)
     else
       Review.all
     end

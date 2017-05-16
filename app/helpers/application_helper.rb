@@ -16,6 +16,8 @@ module ApplicationHelper
         "black"
       when "perform"
         "teal"
+      when "unclassified"
+        "white"
     end
   end
 end

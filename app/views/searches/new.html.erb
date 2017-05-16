@@ -11,6 +11,10 @@
     <label>Host</label>
     <%= f.select(:host,Review::HOSTS,:multiple => true, class: "ui dropdown", :include_blank => true)  %>
   </div>
+  <div class="field">
+    <label>Category</label>
+    <%= f.select(:category,Review::CATEGORIES,:multiple => true, class: "ui dropdown", :include_blank => true)  %>
+  </div>
 
   <div class="field">
     <label>Posted after</label>
