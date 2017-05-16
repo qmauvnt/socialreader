@@ -5,9 +5,7 @@
   <div class="ui message page grid">
         <p> Posted at <%= @review.published_date.strftime("%d/%m/%Y")%> @ <%=link_to "#{@review.host}",reviews_path(forum: "#{@review.host}")%>.<br>
         This review has been viewed <%= @review.popular%> times and classified into
-        <span class="ui <%=type_label_color(@review.type)%> basic label">
-      <%= @review.type.capitalize%>
-    </span>   category by <%=link_to "SocialReader", root_path%>.<br>
+        <%= render 'shared/review_category_tag'%>   category by <%=link_to "SocialReader", root_path%>.<br>
         You can also view <%= link_to "source review", @review.url%>.</p>
           <div class="row">
           <div class="eight wide column">
@@ -30,7 +28,7 @@
             <%= form_for [:admin,TrainReview.new] do |f|%>
           <%= f.hidden_field :review, value: @review.review%>
           <%= f.hidden_field :_id, value: @review.id%>
-            <%= f.select(:category,Review::TYPES, class: "ui dropdown")%>
+            <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
             <%=f.submit "Add to train data", class: "ui green button"%>
           <%end%>
             </div>
@@ -38,7 +36,7 @@
             <%= form_for [:admin,TestReview.new] do |f|%>
           <%= f.hidden_field :review, value: @review.review%>
           <%= f.hidden_field :_id, value: @review.id%>
-            <%= f.select(:category,Review::TYPES, class: "ui dropdown")%>
+            <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
             <%=f.submit "Add to test data", class: "ui blue button"%>
           <%end%>
             </div>

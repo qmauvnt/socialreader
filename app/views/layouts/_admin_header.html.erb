@@ -1,13 +1,13 @@
 <div class="ui fixed menu" style="margin-bottom: 50px">
 <a class="ui item inverted red button" href="<%=root_path%>">SOCIALREADER
+ admin </a>
+<a class="ui item inverted button" href="<%=admin_train_texts_path%>">Train texts
   </a>
-<a class="ui item basic button" href="<%=admin_train_texts_path%>">Train texts
+  <a class="ui item inverted button" href="<%=admin_train_reviews_path%>">Train reviews
   </a>
-  <a class="ui item basic button" href="<%=admin_train_reviews_path%>">Train reviews
+  <a class="ui item inverted button" href="<%=admin_test_reviews_path%>">Test reviews
   </a>
-  <a class="ui item basic button" href="<%=admin_test_reviews_path%>">Test reviews
-  </a>
-  <a class="ui item basic button" href="<%=admin_trains_path%>">Train NB model
+  <a class="ui item inverted button" href="<%=admin_trains_path%>">Train NB model
   </a>
   <div class="right menu">
       <% if user_signed_in? %>

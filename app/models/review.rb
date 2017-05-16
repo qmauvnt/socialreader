@@ -4,7 +4,7 @@ class Review
   include Mongoid::Timestamps
   include Mongoid::Search
 
-  TYPES=["general","camera","design","misc","perform"]
+  CATEGORIES=["general","camera","design","misc","perform"]
   HOSTS=["tinhte.vn","mainguyen.vn"]
 
   belongs_to :user
@@ -22,7 +22,7 @@ class Review
   field :content, type: String
 
   default_scope -> { order_by(:popular => 'desc') }
-  scope :by_category, ->(category) { where(:category => category}
+  scope :by_category, ->(category) { where(:category => category)}
   scope :by_host, ->(host) {where(:host => host)}
   scope :general, ->{ where("category"=>"general")}
   scope :camera, ->{ where("category"=>"camera")}

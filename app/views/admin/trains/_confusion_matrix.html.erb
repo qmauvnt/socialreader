@@ -1,7 +1,7 @@
 <table class="ui center aligned very basic collapsing celled table">
   <thead>
     <tr>
-      <% Review::TYPES.each do |cat|%>
+      <% Review::CATEGORIES.each do |cat|%>
       <th style="color: <%=type_label_color(cat)%>"><%=cat%></th>
       <% end %>
       <th><- classified as</th>
@@ -9,7 +9,7 @@
   </thead>
   <tbody>
   <%y=0%>
-    <%Review::TYPES.each do |cat|%>
+    <%Review::CATEGORIES.each do |cat|%>
       <tr>
         <%0.upto(4) do |x|%>
         <td><%=@lastest_train.matrix[x][y]%></td>
@@ -31,7 +31,7 @@
     </tr>
   </thead>
   <tbody>
-     <%Review::TYPES.each do |cat|%>
+     <%Review::CATEGORIES.each do |cat|%>
       <tr>
         <td style="color: <%=type_label_color(cat)%>"><%=cat%></td>
         <td><%=@lastest_train.precision[cat]%></td>

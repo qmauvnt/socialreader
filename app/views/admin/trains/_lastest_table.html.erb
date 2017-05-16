@@ -7,7 +7,7 @@
           </tr>
         </thead>
         <tbody>
-          <%Review::TYPES.each do |cat|%>
+          <%Review::CATEGORIES.each do |cat|%>
           <tr>
               <td>
                 <span class="ui <%=type_label_color(cat)%> basic label">
@@ -15,7 +15,7 @@
         </span>
               </td>
               <td>
-                <%=TrainReview.by_type(cat).count%>
+                <%=TrainReview.by_category(cat).count%>
               </td>
           </tr>
           <%end%>
@@ -36,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          <%Review::TYPES.each do |cat|%>
+          <%Review::CATEGORIES.each do |cat|%>
           <tr>
               <td>
                 <span class="ui <%=type_label_color(cat)%> basic label">
@@ -44,7 +44,7 @@
         </span>
               </td>
               <td>
-                <%=TestReview.by_type(cat).count%>
+                <%=TestReview.by_category(cat).count%>
               </td>
           </tr>
           <%end%>

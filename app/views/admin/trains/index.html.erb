@@ -12,13 +12,13 @@
     (<% if @lastest_train.classified %>
       CLASSIFIED
     <%else%>
-      DID NOT CLASSIFY
+      NOT CLASSIFIED
     <%end%>)</p>
   </div>
     <%= render 'confusion_matrix'%>
     <h1>Accuracy: <%=@lastest_train.accuracy%>%</h1>
     <% if @lastest_train.classified %>
-      <button class="ui disabled button">
+      <button class="ui disabled big button">
         <i class="file icon"></i>
         Classified
       </button>

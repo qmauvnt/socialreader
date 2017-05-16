@@ -7,6 +7,6 @@ class TestReview
   field :category, type: String
 
   default_scope -> { order_by(:created_at => 'desc') }
-  scope :by_type, ->(type) { where(:category => type)}
+  scope :by_category, ->(category) { where(:category => category)}
 
 end

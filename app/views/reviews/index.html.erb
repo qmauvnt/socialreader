@@ -1,26 +1,26 @@
 <%provide(:title,"Reviews")%>
 <div class="ui top attached tabular menu">
   <% if @general.present?%>
-    <a class="item active" data-tab="<%=Review::TYPES.first%>">
-    <%=Review::TYPES.first.capitalize%>
+    <a class="item active" data-tab="<%=Review::CATEGORIES.first%>">
+    <%=Review::CATEGORIES.first.capitalize%>
     </a>
   <% end %>
-  <%Review::TYPES[1..-1].each do |cat|%>
+  <%Review::CATEGORIES[1..-1].each do |cat|%>
     <% if instance_variable_get("@#{cat}").present?%>
-     <a class="item" data-tab="<%=cat%>"><%=cat.capitalize%></a>
+     <a class="item" data-tab="<%=cat%>"><%=cat.capitaliTYPEze%></a>
     <% end %>
   <%end%>
 </div>
 
 <% if @general.present?%>
-  <div class="ui bottom attached tab segment active" data-tab="<%=Review::TYPES.first%>">
+  <div class="ui bottom attached tab segment active" data-tab="<%=Review::CATEGORIES.first%>">
     <%= paginate(@general) %>
     <%=render @general %>
     <%= paginate(@general) %>
   </div>
 <% end %>
 
-<%Review::TYPES[1..-1].each do |cat|%>
+<%Review::CATEGORIES[1..-1].each do |cat|%>
   <% if instance_variable_get("@#{cat}").present?%>
     <div class="ui bottom attached tab segment" data-tab="<%=cat%>">
       <%= render instance_variable_get("@#{cat}")%>
