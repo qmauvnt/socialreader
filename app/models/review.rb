@@ -28,7 +28,9 @@ class Review
   scope :by_tag, ->(tag) { where(:tag => tag)}
 
   scope :tinhte, ->{ where("host": "tinhte.vn") }
-
+ 
+  index({ title: "text", tag: "text", review: "text" }) 
+ 
   class << self
   def by_host_category host,category
     where(host: host, category: category)

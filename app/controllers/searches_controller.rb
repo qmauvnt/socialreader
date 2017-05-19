@@ -11,11 +11,12 @@ class SearchesController < ApplicationController
 
   def show
     @search=Search.find params[:id]
+    @reviews=@search.reviews.page params[:page]
   end
 
   private
   def search_params
-    params.require(:search).permit(:keyword,:just_title,:host,:published_after,:ordered_by_date)
+    params.require(:search).permit(:category,:keyword,:just_title,:host,:published_after,:ordered_by_date)
   end
   def sign_in_required
     unless user_signed_in?
