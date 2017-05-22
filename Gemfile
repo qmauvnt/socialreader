@@ -25,7 +25,6 @@ gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'kaminari-actionview'
 gem 'jquery-ui-rails'
-gem 'nbayes'
 gem 'ckeditor'
 
 

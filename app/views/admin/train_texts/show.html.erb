@@ -26,7 +26,6 @@
               Check the train text?
           <div class="ui form">
             <%= form_for [:admin,TrainReview.new] do |f|%>
-          <%= f.hidden_field :review, value: @review.review%>
           <%= f.hidden_field :_id, value: @review.id%>
             <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
             <%=f.submit "Add to train data", class: "ui green button"%>
@@ -34,7 +33,6 @@
             </div>
             <div class="ui form">
             <%= form_for [:admin,TestReview.new] do |f|%>
-          <%= f.hidden_field :review, value: @review.review%>
           <%= f.hidden_field :_id, value: @review.id%>
             <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
             <%=f.submit "Add to test data", class: "ui blue button"%>

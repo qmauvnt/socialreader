@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= train_review.review[0..400] %>...
+    <%= Review.find(train_review.id).review[0..400] %>...
   </td>
   <td>
      <span class="ui <%=type_label_color(train_review.category)%> basic label">

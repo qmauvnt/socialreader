@@ -1,6 +1,8 @@
 class Train
+  include NBayes
   include Mongoid::Document
   include Mongoid::Timestamps
+
   after_create :countData,:trainModel,:testModel
   before_update :classifytoMongo
 
@@ -16,11 +18,13 @@ class Train
   field :train_data, type: Hash, default: Hash.new()
   field :test_data, type: Hash, default: Hash.new()
   field :matrix, type: Array, default:a
+  field :data, type: Hash, default: Hash.new()
+  field :vocab, type: Hash, default: Hash.new()
 
   def classifytoMongo
     if self.classified_change==[false,true]
       trainModel
-      Review.each do |doc|
+      Review.crawled.each do |doc|
         tokens= doc.review.split(/\s+/)
         result=@nbayes.classify(tokens)
         doc["type"]=result.max_class
@@ -29,10 +33,10 @@ class Train
   end
 
   def countData
-    Review::TYPES.each do |cat|
-      self.train_data[cat]=TrainReview.by_type(cat).count
+    Review::CATEGORIES.each do |cat|
+      self.train_data[cat]=TrainReview.by_category(cat).count
       self.train_data['total']=TrainReview.count
-      self.test_data[cat]=TestReview.by_type(cat).count
+      self.test_data[cat]=TestReview.by_category(cat).count
       self.test_data['total']=TestReview.count
     end
   end
@@ -55,14 +59,14 @@ class Train
       y=getValue doc[:category]
       a[x][y]+=1
     end
-    Review::TYPES.each do |cat|
+    Review::CATEGORIES.each do |cat|
       self.precision[cat]=get_precision(cat,a).round(2)
       self.recall[cat]=get_recall(cat,a).round(2)
       self.fmeasure[cat]=get_fmeasure(cat,a).round(2)
     end
     self.accuracy=get_accuracy(a,sum).round(2)
-    Review::TYPES.each do |cat1|
-      Review::TYPES.each do|cat2|
+    Review::CATEGORIES.each do |cat1|
+      Review::CATEGORIES.each do|cat2|
         self.matrix=a
       end
     end

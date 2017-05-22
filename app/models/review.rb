@@ -1,7 +1,6 @@
 class Review
   include Mongoid::Document
   include Mongoid::Timestamps
-  include NBayes
 
   CATEGORIES=["general","camera","design","misc","perform"]
   HOSTS=["tinhte.vn","mainguyen.vn"]
@@ -19,11 +18,15 @@ class Review
   field :popular, type: Integer
   field :review, type: String
   field :content, type: String
+  field :trained, type: Boolean, default: false
 
   default_scope -> { order_by(:published_date => 'desc') }
+  scope :untrained, ->{ where(:trainned => false)}
+  scope :native, ->{ where(host: "socialreader")}
   scope :ordered_by_popular, -> { order_by(:popular => 'desc') }
   scope :by_category, ->(category) { where(:category => category)}
   scope :by_host, ->(host) {where(:host => host)}
+  scope :crawled, ->{where(:url.exists => true)}
   scope :after_date, ->(date) { where(:published_date.gte => date)}
   scope :ordered_by_date, -> { order(published_date: :desc) }
   scope :by_tag, ->(tag) { where(:tag => tag)}
@@ -33,10 +36,6 @@ class Review
   index({ title: "text", tag: "text", review: "text" })
 
   class << self
-    def create_new
-      byebug
-    end
-
     def by_host_category host,category
       where(host: host, category: category)
     end

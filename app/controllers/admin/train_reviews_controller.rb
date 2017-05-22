@@ -1,18 +1,23 @@
 class Admin::TrainReviewsController < Admin::AdminController
   def index
-    @train_reviews=TrainReview.all
+    @train_reviews=TrainReview.page params[:page]
   end
 
   def new
-
+    @train_review=TrainReview.new
+    @reviews=Review.where(trained: false).page params[:page]
   end
 
   def create
     begin
       @train_review=TrainReview.create train_review_params
       @train_text=TrainText.find(train_review_params[:_id])
-      @train_text.delete
-      redirect_to admin_train_reviews_path
+      unless @train_text.nil?
+        @train_text.delete
+        redirect_to admin_train_reviews_path
+      else
+        redirect_to new_admin_train_review_path
+      end
     rescue  => e
       flash[:danger] = e
       @train_review=TrainReview.find(train_review_params[:_id])

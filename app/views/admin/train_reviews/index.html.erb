@@ -45,6 +45,18 @@
       </tr>
     </thead>
     <tbody>
+      <div class="ui right aligned grid">
+        <div class="left floated left aligned six wide column">
+          <div class="ui segment">
+            <%= paginate @train_reviews %>
+          </div>
+        </div>
+        <div class="right floated right aligned six wide column">
+          <div class="ui segment">
+            <a class="ui left aligned green button" href="<%= new_admin_train_review_path %>"> New training data </a>
+          </div>
+        </div>
+      </div>
       <%= render @train_reviews%>
     </tbody>
   </table>

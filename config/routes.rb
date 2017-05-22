@@ -17,5 +17,6 @@ Rails.application.routes.draw do
     resources :train_texts
     resources :train_reviews
     resources :test_reviews
+    resources :reviews
   end
 end

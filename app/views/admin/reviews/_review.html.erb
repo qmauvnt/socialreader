@@ -1,0 +1,51 @@
+<div class="ui items internally celled grid" style="padding-top:20px">
+  <a class="ui large <%=type_label_color(review.category)%> ribbon label" href="/reviews?category=<%=review.category%>">
+    <%=review.category.upcase%></a>
+      <div class="raised item">
+    <div class="ui internally celled grid">
+   <div class="row">
+     <div class="thirteen wide column">
+
+      <a class="header" href="<%= admin_review_path(review)%>"><%=review.title%></a>
+      <div class="fb-like" data-href="https://localhost:3000" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+       <div class="meta">
+      </div>
+      <div class="description">
+        <span><%=review.review%>...</span>
+      </div>
+      <div class="extra">
+      <span class="ui tag label">Tags</span>
+        <div class="ui celled horizontal list">
+          <% unless review.tag.nil?%>
+          <%=review.tag.each do |tag|%>
+            <div class="item"><%=link_to "#{tag}", reviews_path(:tag=> tag)%></div>
+          <% end %>
+          <%end%>
+        </div>
+        </div>
+        <div class="ui bottom right attached label">
+      <%=link_to "#{review.host}", reviews_path(forum: "#{review.host}")%></div>
+        </div>
+        <div class="three wide column">
+          <div class="ui form">
+             <%= form_for [:admin,TrainReview.new] do |f|%>
+            <%= f.hidden_field :_id, value: review.id%>
+              <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
+              <%=f.submit "Add to train data", class: "ui green button"%>
+            <%end%>
+          </div>
+          <div class="ui form">
+             <%= form_for [:admin,TestReview.new] do |f|%>
+            <%= f.hidden_field :_id, value: review.id%>
+              <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
+              <%=f.submit "Add to test data", class: "ui red button"%>
+            <%end%>
+          </div>
+        </div>
+
+
+    </div>
+    </div>
+  </div>
+</div>
+

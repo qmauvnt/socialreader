@@ -13,11 +13,11 @@ class Search
 
   private
   def find_reviews
-    byebug	
+    byebug
     reviews=Review.all
+    reviews=reviews.text_search(self.keyword) if self.keyword.present?
     reviews=reviews.by_category(self.category) if self.category?
     reviews=reviews.by_host(host) if self.host.present?
-    reviews=reviews.text_search(self.keyword) if self.keyword.present?
     reviews=reviews.after_date(self.published_after) if self.published_after.present?
     reviews=reviews.ordered_by_date if self.ordered_by_date?
     reviews
