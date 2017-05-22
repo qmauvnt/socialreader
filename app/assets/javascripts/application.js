@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery-ui
 //= require owl.carousel
+//= require ckeditor/init
 //= require jquery_ujs
 //= require semantic-ui
 //= require rails-ujs
@@ -42,3 +43,10 @@ $( document ).on('turbolinks:load', function() {
 
   $('.ui.checkbox').checkbox();
 })
+
+ready = ->
+  $('.ckeditor').each ->
+  CKEDITOR.replace $(this).attr('id')
+
+$(document).ready(ready)
+$(document).on('page:load', ready) } }

@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -25,6 +26,7 @@ gem 'kaminari-mongoid'
 gem 'kaminari-actionview'
 gem 'jquery-ui-rails'
 gem 'nbayes'
+gem 'ckeditor'
 
 
 group :development, :test do
