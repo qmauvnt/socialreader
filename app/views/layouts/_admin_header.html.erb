@@ -1,5 +1,5 @@
 <div class="ui fixed menu" style="margin-bottom: 50px">
-<a class="ui item inverted red button" href="<%=root_path%>">SOCIALREADER
+<a class="ui item inverted red button" href="<%=admin_root_path%>">SOCIALREADER
  admin </a>
 <a class="ui item inverted button" href="<%=admin_train_texts_path%>">Train texts
   </a>
@@ -9,11 +9,15 @@
   </a>
   <a class="ui item inverted button" href="<%=admin_trains_path%>">Train NB model
   </a>
+  <a class="ui item inverted button" href="<%=admin_reviews_path%>">Reviews
+  </a>
+  <a class="ui item inverted button" href="<%=admin_users_path%>">Users
+  </a>
   <div class="right menu">
       <% if user_signed_in? %>
       <div class="item">
       <div class="ui transparent icon input">
-        <%= form_tag reviews_path, method: "get" do %>
+        <%= form_tag admin_reviews_path, method: "get" do %>
           <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
           <%= submit_tag "Find", :name => nil%>
         <% end %>

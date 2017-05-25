@@ -11,8 +11,12 @@ class Admin::TestReviewsController < Admin::AdminController
     begin
       @test_review=TestReview.create test_review_params
       @train_text=TrainText.find(test_review_params[:_id])
-      @train_text.delete
-      redirect_to admin_test_reviews_path
+      unless @train_text.nil?
+        @train_text.delete
+        redirect_to admin_test_reviews_path
+      else
+        redirect_to new_admin_train_review_path
+      end
     rescue  => e
       flash[:danger] = e
       @test_review=TestReview.find(test_review_params[:_id])
@@ -38,7 +42,7 @@ class Admin::TestReviewsController < Admin::AdminController
   end
 
   def destroy
-    TestReview.find(params[:id]).delete
+    TestReview.find(params[:id]).destroy
     redirect_to admin_test_reviews_path
     flash[:sucess]= "Train review has been deleted"
   end

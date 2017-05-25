@@ -1,4 +1,11 @@
 <% provide(:title,"Test texts")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_test_reviews_path%>">Test reviews</a>
+  <a href="<%=new_admin_train_review_path%>" class="ui green button">New test reviews</a>
+</div>
+
 <% if @test_reviews.any?%>
 
 <div class="ui top attached tabular menu">
@@ -51,6 +58,6 @@
 </div>
 <% else %>
   <div class="ui message">
-    There is no train reviews
+    There is no test reviews
   </div>
 <% end %>

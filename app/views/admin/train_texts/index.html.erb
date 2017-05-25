@@ -1,4 +1,10 @@
 <% provide(:title,"Train texts")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_train_texts_path%>">Train texts</a>
+</div>
+
 <% if @train_texts.any?%>
   <table class="ui very basic collapsing celled table">
     <thead>

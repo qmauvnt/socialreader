@@ -5,7 +5,7 @@ class Admin::TrainReviewsController < Admin::AdminController
 
   def new
     @train_review=TrainReview.new
-    @reviews=Review.where(trained: false).page params[:page]
+    @reviews=Review.untrained.page params[:page]
   end
 
   def create
@@ -43,7 +43,7 @@ class Admin::TrainReviewsController < Admin::AdminController
   end
 
   def destroy
-    TrainReview.find(params[:id]).delete
+    TrainReview.find(params[:id]).destroy
     redirect_to admin_train_reviews_path
     flash[:sucess]= "Train review has been deleted"
   end

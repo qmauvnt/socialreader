@@ -10,7 +10,7 @@
     <div class="text">
       <%= comment.content %>
     </div>
-    <% if current_user == comment.creator %>
+    <% if current_user.id == comment.user_id %>
     <div class="actions">
       <%= link_to "Delete", review_comment_path(comment.review,comment.id), method: :delete, data: {confirmation: "Are you sure?"}%>
     </div>

@@ -2,24 +2,20 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if params[:search]
-      @all=Review.search params[:search]
-    elsif params[:tag]
-      @all=Review.by_tag params[:tag]
-    elsif params[:forum]
-      @all=Review.by_host params[:forum]
-    elsif params[:category]
-      @all=Review.by_category params[:category]
-    else
-       @all=Review.all
-    end
-    @reviews=@all.ordered_by_popular.page(params[:page])
+   @reviews=Review.with_params(params).page params[:page]
   end
 
   def show
-    @review=Review.find(params[:id])
-    @comment=@review.comments.build
-    @train_text=TrainText.new
+      @review=Review.find(params[:id])
+      @comment=@review.comments.build
+      @train_text=TrainText.new
+    if params[:clip]
+      current_user.clipped_reviews << params[:clip] unless current_user.clipped_reviews.include? params[:clip]
+      current_user.save
+    elsif params[:unclip]
+      current_user.clipped_reviews.delete(params[:unclip])
+      current_user.save
+    end
   end
 
   def new
@@ -29,7 +25,6 @@ class ReviewsController < ApplicationController
   def create
     params[:review][:tag]=params[:review][:tag].split(",").to_a
     params[:review][:review]=Nokogiri::HTML(params[:review][:content]).text
-    byebug
     current_user.reviews.create! review_params
     redirect_to reviews_path
   end

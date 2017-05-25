@@ -1,5 +1,15 @@
 <%provide(:title,"Reviews")%>
-<% if @reviews.present?%>
+<div class="ui segment">
+<%Review::CATEGORIES.each do |cat|%>
+  <% unless params[:search]%>
+    <a class="ui <%=type_label_color(cat)%> button" href="<%=reviews_path(category: "#{cat}")%>"><%=cat.upcase%></a>
+  <%else%>
+    <a class="ui <%=type_label_color(cat)%> button" href="<%=reviews_path(search: "#{params[:search]}",category: "#{cat}")%>"><%=cat.upcase%></a>
+  <%end%>
+<% end %>
+</div>
+
+<% if @reviews.any?%>
   <%= paginate(@reviews) %>
     <%= render @reviews %>
   <%= paginate(@reviews) %>

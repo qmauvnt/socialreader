@@ -1,0 +1,99 @@
+<%provide(:title,"Reviews")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_reviews_path%>">Reviews</a>
+  <a href="<%=new_admin_review_path%>" class="ui green button">New review</a>
+</div>
+<%unless params[:search]%>
+<% if @reviews.present?%>
+<div class="ui top attached tabular menu">
+  <a class="item " data-tab="first">Statistic</a>
+  <a class="item active" data-tab="second">Index</a>
+</div>
+<div class="ui bottom attached tab segment " data-tab="first">
+  <table class="ui versy basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Number of reviews</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%Review::CATEGORIES.each do |cat|%>
+      <tr>
+          <td>
+            <span class="ui <%=type_label_color(cat)%> basic label">
+      <%= cat.capitalize%>
+    </span>
+          </td>
+          <td>
+            <%=@reviews.by_category(cat).count%>
+          </td>
+      </tr>
+      <%end%>
+    </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th><%=@reviews.count%></th>
+        </tr>
+      </tfoot>
+  </table>
+</div>
+<div class="ui bottom attached tab segment active" data-tab="second">
+  <%= paginate(@reviews) %>
+    <% @reviews.each do |review| %>
+      <div class="ui items internally celled grid" style="padding-top:20px">
+        <a class="ui large <%=type_label_color(review.category)%> ribbon label" href="/admin/reviews?category=<%=review.category%>">
+          <%=review.category.upcase%></a>
+            <div class="raised item">
+          <div class="ui internally celled grid">
+         <div class="row">
+           <div class="thirteen wide column">
+
+            <a class="header" href="<%= admin_review_path(review)%>"><%=review.title%></a>
+            <div class="fb-like" data-href="https://localhost:3000" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+             <div class="meta">
+            </div>
+            <div class="description">
+              <span><%=review.review%></span>
+            </div>
+            <div class="extra">
+            <span class="ui tag label">Tags</span>
+              <div class="ui celled horizontal list">
+                <% unless review.tag.nil?%>
+                <%=review.tag.each do |tag|%>
+                  <div class="item"><%=link_to "#{tag}", admin_reviews_path(:tag=> tag)%></div>
+                <% end %>
+                <%end%>
+              </div>
+              </div>
+              <div class="ui bottom right attached label">
+            <%=link_to "#{review.host}", admin_reviews_path(forum: "#{review.host}")%></div>
+              </div>
+              <div class="three wide column">
+                <div class="ui form">
+                    <a href="<%= admin_review_path(review)%>" data-method="delete" class="ui red button">Delete</a>
+                </div>
+                <div class="ui form">
+                    <a href="<%= edit_admin_review_path(review) %>" class="ui green button">Edit</a>
+                </div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <%= paginate(@reviews) %>
+</div>
+<%else%>
+  <div class="ui bottom attached tab segment active">
+    There is no reviews, you can write one <%= link_to "here", new_admin_review_path %>
+  </div>
+<%end%>
+<% else %>
+  <div class="ui bottom attached tab segment active">
+    No result has the term "<%=params[:search]%>". Go to <%= link_to "Advanced search", new_search_path%> for more informations
+  </div>
+<% end %>

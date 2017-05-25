@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= @review.review[0..400] %>...
+    <%= Review.find(test_review.id).review[0..400] %>...
   </td>
   <td>
      <span class="ui <%=type_label_color(test_review.category)%> basic label">

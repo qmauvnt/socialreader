@@ -12,7 +12,9 @@
     <div class="menu">
       <a class="item" href="<%= reviews_path %>">Reviews</a>
       <a class="item" href="<%= new_review_path %>">New review</a>
-      <a class="item">Remove</a>
+      <% if current_user%>
+      <a class="item" href="<%= clipped_review_path(id: current_user.id) %>">Clipped reviews</a>
+      <%end%>
     </div>
   </div>
   <a class="item" id="profile">

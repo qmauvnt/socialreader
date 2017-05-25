@@ -1,1 +1,17 @@
 <%provide(:title,"All users")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_users_path%>">Users</a>
+</div>
+<table class="ui very basic collapsing celled table">
+  <thead>
+    <tr><th>User</th>
+    <th>Email</th>
+    <th>Posts</th>
+    <th>Actions</th>
+  </tr></thead>
+  <tbody>
+    <%= render @users %>
+  </tbody>
+</table>

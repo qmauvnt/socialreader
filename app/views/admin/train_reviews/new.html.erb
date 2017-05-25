@@ -1,5 +1,12 @@
 <%provide(:title, "New train data")%>
+<div class="ui huge breadcrumb">
+ <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=new_admin_train_review_path%>">New training data</a>
+</div>
 
-<%= paginate @reviews %>
-<%= render @reviews %>
-<%= paginate @reviews %>
+<div>
+  <%= paginate @reviews %>
+  <%= render @reviews %>
+  <%= paginate @reviews %>
+</div>

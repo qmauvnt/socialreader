@@ -1,4 +1,11 @@
 <%provide(:title,"Test review")%>
+<div class="ui huge breadcrumb">
+ <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_test_reviews_path%>">Test reviews</a>
+  <i class="right chevron icon divider"></i>
+  <div class="active section">Test review: <a href="<%=admin_test_review_path(@test_review)%>"><%=@review.title[0..20]%>...</a></div>
+</div>
 
 <div id="container">
   <h1 class="ui header"><%= @review.title %></h1>
@@ -22,18 +29,18 @@
             <div class="row">
             Train data added @ <%=@test_review.created_at.strftime("%d/%m/%Y")%>
             <div class="eight wide column">
-          <%= link_to "Delete", admin_train_text_path, method: :delete, data:{confirmation: "Are you sure?"}, class: "ui red button"%>
+          <%= link_to "Delete", admin_test_review_path, method: :delete, data:{confirmation: "Are you sure?"}, class: "ui red button"%>
             </div>
           </div>
             </div>
           </div>
           </div>
-  </div>
   <p><%=@review.content.html_safe%></p>
   <span class="ui tag label">Tags</span>
   <div class="ui celled horizontal list">
     <% @review.tag.each do |tag|%>
       <div class="item"><%=link_to "#{tag}", reviews_path(:tag=> tag)%></div>
     <% end %>
+  </div>
   </div>
 </div>

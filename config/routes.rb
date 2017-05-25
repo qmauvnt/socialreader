@@ -8,8 +8,9 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :train_texts
-
   resources :searches
+  resources :users
+  resources :clipped_reviews, controller: "clipped_reviews"
 
   namespace :admin do
     root "static_pages#home"
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
     resources :train_reviews
     resources :test_reviews
     resources :reviews
+    resources :users
   end
 end

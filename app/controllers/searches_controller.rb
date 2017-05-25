@@ -21,7 +21,6 @@ class SearchesController < ApplicationController
   def sign_in_required
     unless user_signed_in?
       flash[:danger] = "You have to log in "
-    byebug
       redirect_to new_user_session_path
     end
   end

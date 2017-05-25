@@ -1,0 +1,36 @@
+<%provide(:title,"New review")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_reviews_path%>">Reviews</a>
+  <i class="right chevron icon divider"></i>
+  <div class="active section">New review</div>
+</div>
+<%= form_for [:admin,@review] do |f|%>
+<div class="ui form">
+  <h4 class="ui dividing header">Information</h4>
+  <div class="field">
+    <label>Title</label>
+      <div class="field">
+        <%= f.text_field :title, placeholder: "Title"%>
+      </div>
+  </div>
+      <%= f.hidden_field :published_date, value: Time.now%>
+      <%= f.hidden_field :host, value: "socialreader"%>
+      <%= f.hidden_field :popular, value: 1%>
+  <div class="two fields">
+    <div class="field">
+      <label>Category</label>
+       <%= f.select(:category,Review::CATEGORIES,:multiple => true, class: "ui dropdown")  %>
+    </div>
+  </div>
+  <h4 class="ui dividing header">Content</h4>
+  <%= f.cktext_area :content %>
+  <div class="field">
+    <label>Tag</label>
+      <div class="field">
+        <%= f.text_field :tag, placeholder: "Divided by ,"%>
+      </div>
+  </div>
+  <%= f.submit "Post", class: "positive ui button"%>
+<%end%>

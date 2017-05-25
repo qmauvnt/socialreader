@@ -1,4 +1,10 @@
 <% provide(:title,"Train data")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_train_reviews_path%>">Train reviews</a>
+  <a href="<%=new_admin_train_review_path%>" class="ui green button">New train reviews</a>
+</div>
 <% if @train_reviews.any?%>
 
 <div class="ui top attached tabular menu">

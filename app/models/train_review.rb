@@ -2,6 +2,7 @@ class TrainReview
   include Mongoid::Document
   include Mongoid::Timestamps
   after_create :update_trainned_review
+  before_destroy :update_untrained_review
 
   field :_id, type: String
   field :category, type: String
@@ -11,7 +12,13 @@ class TrainReview
 
   def update_trainned_review
     review=Review.find(self.id)
-    review.trained=true
+    review[:trainned]=true
+    review.save
+  end
+
+  def update_untrained_review
+    review=Review.find self.id
+    review[:trainned]=false
     review.save
   end
 end

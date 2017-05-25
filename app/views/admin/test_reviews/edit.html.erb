@@ -1,4 +1,12 @@
 <%provide(:title, "Test review edit")%>
+<div class="ui huge breadcrumb">
+ <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_test_reviews_path%>">Test reviews</a>
+  <i class="right chevron icon divider"></i>
+  <div class="active section">Edit: <a href="<%=admin_test_review_path(@test_review)%>"><%=@review.title[0..20]%>...</a></div>
+</div>
+
 <div class="ui big red message">
   <p class="big red">You have to change the test review</p>
 </div>

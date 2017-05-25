@@ -2,10 +2,13 @@ class User
   include Mongoid::Document
   include Mongoid::Paperclip
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
+  validates :email, uniqueness: true
+  validates :name, presence: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
 
   has_mongoid_attached_file :avatar, :style => {:default_url => "images/missing.png"}
 
@@ -21,5 +24,6 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
+  field :clipped_reviews, type: Array, default: Array.new()
 
 end

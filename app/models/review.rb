@@ -2,6 +2,8 @@ class Review
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  before_destroy :delete_reviews
+
   CATEGORIES=["general","camera","design","misc","perform"]
   HOSTS=["tinhte.vn","mainguyen.vn"]
 
@@ -18,9 +20,9 @@ class Review
   field :popular, type: Integer
   field :review, type: String
   field :content, type: String
-  field :trained, type: Boolean, default: false
+  field :trainned, type: Boolean, default: false
 
-  default_scope -> { order_by(:published_date => 'desc') }
+  default_scope -> { order_by(:popular => 'desc') }
   scope :untrained, ->{ where(:trainned => false)}
   scope :native, ->{ where(host: "socialreader")}
   scope :ordered_by_popular, -> { order_by(:popular => 'desc') }
@@ -35,14 +37,36 @@ class Review
 
   index({ title: "text", tag: "text", review: "text" })
 
+  def delete_reviews
+    train_review=TrainReview.find(self.id)
+    test_review=TestReview.find(self.id)
+    if train_review
+      train_review.destroy
+    elsif test_review
+      test_review.destroy
+    else
+    end
+  end
+
+
+
   class << self
     def by_host_category host,category
       where(host: host, category: category)
     end
 
+    def with_params params
+      reviews=Review.all
+      reviews=reviews.search params[:search] if params[:search]
+      reviews=reviews.by_tag params[:tag] if params[:tag]
+      reviews=reviews.by_host params[:forum] if params[:forum]
+      reviews=reviews.by_category params[:category] if params[:category]
+      reviews
+    end
+
     def search search
       if search
-        Review.text_search(search)
+        Review.text_search("\"#{search}\"")
       else
         Review.all
       end

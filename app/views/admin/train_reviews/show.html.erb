@@ -1,8 +1,15 @@
 <%provide(:title,"Train review")%>
+<div class="ui huge breadcrumb">
+ <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_train_reviews_path%>">Train reviews</a>
+  <i class="right chevron icon divider"></i>
+  <div class="active section">Train review: <a href="<%=admin_train_review_path(@train_review)%>"><%=@review.title[0..20]%>...</a></div>
+</div>
 
 <div id="container">
   <h1 class="ui header"><%= @review.title %></h1>
-  <div class="ui message page grid">
+  <div class="ui message page grid" >
         <p> Posted at <%= @review.published_date.strftime("%d/%m/%Y")%> @ <%=link_to "#{@review.host}",reviews_path(forum: "#{@review.host}")%>.<br>
         This review has been viewed <%= @review.popular%> times and classified into
         <%=render 'shared/review_category_tag'%>
@@ -29,7 +36,6 @@
             </div>
           </div>
           </div>
-  </div>
   <p><%=@review.content.html_safe%></p>
   <span class="ui tag label">Tags</span>
   <div class="ui celled horizontal list">
