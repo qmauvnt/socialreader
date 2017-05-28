@@ -1,6 +1,6 @@
 class Admin::TrainTextsController < Admin::AdminController
   def index
-    @train_texts=TrainText.unchecked
+    @train_texts=TrainText.all
   end
 
   def show

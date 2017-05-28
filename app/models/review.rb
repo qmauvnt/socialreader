@@ -9,10 +9,15 @@ class Review
 
   belongs_to :user
   embeds_many :comments
+  validates :title, presence: true
+  validates :category, presence: true
+  validates :host, presence: true
+  validates :review, presence: true
+  validates :content, presence: true
 
   field :id, type: String
   field :title, type: String
-  field :host, type: String
+  field :host, type: String, default: "socialreader"
   field :category, type: String, default: "unclassified"
   field :url,type: String
   field :published_date, type: DateTime

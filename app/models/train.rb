@@ -25,7 +25,8 @@ class Train
     if self.classified_change==[false,true]
       trainModel
       Review.crawled.each do |doc|
-        tokens= doc.review.split(/\s+/)
+        classify_doc=doc.title+" "+doc.review+doc.tag.join(" ")
+        tokens= classify_doc.review.split(/\s+/)
         result=@nbayes.classify(tokens)
         doc["type"]=result.max_class
       end
@@ -44,7 +45,9 @@ class Train
   def trainModel
     @nbayes=NBayes::Base.new
     TrainReview.all.each do |doc|
-      @nbayes.train(doc[:review].split(/\s+/),doc[:category])
+      review=Review.find(doc[:id])
+      train_doc=review.title+" "+review.review+review.tag.join(" ")
+      @nbayes.train(train_doc.split(/\s+/),doc[:category])
     end
   end
 
@@ -53,7 +56,9 @@ class Train
     a.map!{|a| a=Array.new(5,0)}
     sum=TestReview.count
     TestReview.all.each do |doc|
-      tokens=doc[:review].split(/\s+/)
+      review=Review.find(doc[:id])
+      test_doc=review.title+" "+review.review+review.tag.join(" ")
+      tokens=test_doc.split(/\s+/)
       result=@nbayes.classify(tokens)
       x=getValue result.max_class
       y=getValue doc[:category]

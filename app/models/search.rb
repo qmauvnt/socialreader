@@ -2,7 +2,6 @@ class Search
   include Mongoid::Document
 
   field :keyword, type: String
-  field :just_title, type: Boolean
   field :host, type: String
   field :published_after, type: Date
   field :ordered_by_date, type: Boolean

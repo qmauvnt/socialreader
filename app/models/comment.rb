@@ -1,13 +1,11 @@
 class Comment
   include Mongoid::Document
-  include Mongoid::Timestamps::Short
+  include Mongoid::Timestamps
+
+  validates :content, presence: true
 
   embedded_in :review, :inverse_of => :comments
 
   field :content, type: String
-  field :user_id, type: Integer
-
-  def creator
-    User.find(self.user_id.to_i)
-  end
+  field :user_id, type: BSON::ObjectId
 end

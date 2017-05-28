@@ -24,13 +24,12 @@
         <label>This review is about:</label>
       </div>
       <div class="field">
-        <%= f.select(:category,Review::CATEGORIES-[@review.category], class: "ui dropdown")  %>
+        <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")  %>
       </div>
       <div class="field">
         <%= f.submit "Re-classify", class:"ui red button"%>
       </div>
         <%= f.hidden_field :_id,value: @review.id%>
-        <%= f.hidden_field :review,value: @review.review%>
       </div>
       </div>
       <% end %>

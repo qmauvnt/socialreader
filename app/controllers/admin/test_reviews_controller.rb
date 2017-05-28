@@ -3,10 +3,6 @@ class Admin::TestReviewsController < Admin::AdminController
     @test_reviews=TestReview.all
   end
 
-  def new
-
-  end
-
   def create
     begin
       @test_review=TestReview.create test_review_params

@@ -6,8 +6,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    Review.find(params[:review_id]).comments.find(params[:id]).delete
-    redirect_to :back
+    @review=Review.find(params[:review_id])
+    @review.comments.find(params[:id]).delete
+    redirect_to @review
     flash[:success] = "Your comment has been deleted!"
   end
 

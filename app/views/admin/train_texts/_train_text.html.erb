@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= train_text.review[0..400] %>...
+    <%= Review.find(train_text.id).review[0..400] %>...
 
   </td>
   <td>
