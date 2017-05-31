@@ -14,6 +14,7 @@ class Review
   validates :host, presence: true
   validates :review, presence: true
   validates :content, presence: true
+  has_one :train_text, dependent: :destroy
 
   field :id, type: String
   field :title, type: String
