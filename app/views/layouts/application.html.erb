@@ -28,7 +28,10 @@
     <div class="ui internally grid" id="body">
       <div class="row" >
         <div class="four wide column" >
+          <%unless params[controller]=="devise/registrations"||
+            params[controller]=="devise/sessions"%>
           <%= render 'layouts/side_bar'%>
+          <%end%>
         </div>
         <div class="eleven wide column">
         <%= semantic_flash %>

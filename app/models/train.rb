@@ -24,9 +24,13 @@ class Train
   def classifytoMongo
     if self.classified_change==[false,true]
       trainModel
-      Review.crawled.each do |doc|
-        classify_doc=doc.title+" "+doc.review+doc.tag.join(" ")
-        tokens= classify_doc.review.split(/\s+/)
+      Review.all.unscoped.sort({"_id" => 1}).each do |doc|
+        if doc.review.nil?
+          classify_doc=doc.title+" "+doc.tag.join(" ")
+        else
+          classify_doc=doc.title+" "+doc.review+doc.tag.join(" ")
+        end
+        tokens= classify_doc.split(/\s+/)
         result=@nbayes.classify(tokens)
         doc["type"]=result.max_class
       end

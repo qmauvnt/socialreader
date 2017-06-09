@@ -9,8 +9,9 @@ class UsersController < ApplicationController
 
   def update
     @user=User.find params[:id]
+    byebug
     @user.update_attributes user_params
-    redirect_to admin_users_path
+    redirect_to users_path
     flash[:success]="User has been updated"
   end
 

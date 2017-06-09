@@ -9,19 +9,19 @@
   </div>
   <div class="item">
     <%= link_to "Home", root_path %>
-    <div class="menu">
-      <a class="item" href="<%= reviews_path %>">Reviews</a>
+  </div>
+  <a class="item" id="reviews" href="<%= reviews_path %>">
+    <i class="folder open outline icon"></i>
+    Reviews
+  </a>
+  <div class="menu">
       <a class="item" href="<%= new_review_path %>">New review</a>
       <% if current_user%>
       <a class="item" href="<%= clipped_review_path(id: current_user.id) %>">Clipped reviews</a>
       <%end%>
     </div>
-  </div>
-  <a class="item" id="profile">
+  <a class="item" href="<%= edit_user_path current_user%>" id="profile">
     <i class="spy icon"></i>
     Profile
-  </a>
-  <a class="item">
-    Messages
   </a>
 </div>

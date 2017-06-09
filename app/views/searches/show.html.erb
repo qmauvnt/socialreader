@@ -1,5 +1,4 @@
 <%provide(:title, "Search results")%>
-
 <% if @search.reviews.present?%>
   <%= paginate @reviews %>
   <%= render @reviews %>

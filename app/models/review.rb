@@ -5,7 +5,7 @@ class Review
   before_destroy :delete_reviews
 
   CATEGORIES=["general","camera","design","misc","perform"]
-  HOSTS=["tinhte.vn","mainguyen.vn"]
+  HOSTS=["tinhte.vn","vnreview.vn","news.zing.vn"]
 
   belongs_to :user
   embeds_many :comments
@@ -41,7 +41,8 @@ class Review
 
   scope :tinhte, ->{ where("host": "tinhte.vn") }
 
-  index({ title: "text", tag: "text", review: "text" })
+  index({ title: "text", tag: "text", review: "text" },{weights: {title: 10,tag: 10, review: 2},name: "TextIndex"
+   })
 
   def delete_reviews
     train_review=TrainReview.find(self.id)
@@ -73,6 +74,7 @@ class Review
     def search search
       if search
         Review.text_search("\"#{search}\"")
+        # Review.text_search("#{search}")
       else
         Review.all
       end

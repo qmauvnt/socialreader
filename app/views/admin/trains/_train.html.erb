@@ -68,7 +68,7 @@
     <%Review::CATEGORIES.each do |cat|%>
       <tr>
         <%0.upto(4) do |x|%>
-        <td><%=@lastest_train.matrix[x][y]%></td>
+        <td><%=train.matrix[x][y]%></td>
         <%end%>
         <%y+=1%>
         <td style="color: <%=type_label_color(cat)%>"><%=cat%></td>
