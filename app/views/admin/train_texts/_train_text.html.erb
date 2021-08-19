@@ -1,0 +1,21 @@
+<tr>
+  <td>
+    <%= Review.find(train_text.id).review[0..400] %>...
+
+  </td>
+  <td>
+    <% train_text.category.each do |cat|%>
+     <span class="ui <%=type_label_color(cat)%> basic label">
+      <%= cat.capitalize%>
+    </span>
+     <%end %>
+  </td>
+  <td>
+    <%= link_to [:admin,train_text] do %>
+     <div class="ui small green button active"><i class="info icon"></i></div>
+    <% end%>
+    <%= link_to [:admin,train_text], method: :delete, data:{confirmation: "Are you sure?"} do %>
+     <div class="ui small red button active"><i class="trash icon"></i></div>
+    <% end%>
+  </td>
+</tr>

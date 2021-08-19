@@ -1,0 +1,27 @@
+<div class="ui sticky vertical menu" style=" padding-top:50px width: 900px !important; height: 900px !important; left: -500px;">
+  <div class="item">
+    <a class="ui animated red fade button" href="<%=new_search_path%>" >
+      <div class="visible content">Advanced search</div>
+      <div class="hidden content">
+      <i class="search icon"></i>
+      </div>
+    </a>
+  </div>
+  <div class="item">
+    <%= link_to "Home", root_path %>
+  </div>
+  <a class="item" id="reviews" href="<%= reviews_path %>">
+    <i class="folder open outline icon"></i>
+    Reviews
+  </a>
+  <div class="menu">
+      <a class="item" href="<%= new_review_path %>">New review</a>
+      <% if current_user%>
+      <a class="item" href="<%= clipped_review_path(id: current_user.id) %>">Clipped reviews</a>
+      <%end%>
+    </div>
+  <a class="item" href="<%= edit_user_path current_user%>" id="profile">
+    <i class="spy icon"></i>
+    Profile
+  </a>
+</div>

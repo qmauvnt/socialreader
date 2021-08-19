@@ -1,0 +1,5 @@
+<%if @review.category%>
+  <span class="ui <%=type_label_color(@review.category)%> basic label"><%= @review.category.capitalize%></span>
+<%else%>
+  <span class="ui grey basic label">Unclassified</span>
+<%end%>

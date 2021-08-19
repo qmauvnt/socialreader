@@ -1,0 +1,25 @@
+<tr>
+  <td>
+      <div class="content">
+        <div class="sub header"><%= user.name %>
+      </div>
+    </div>
+  </td>
+  <td>
+    <%= user.email %>
+  </td>
+  <td>
+    <%= user.reviews.count %>
+  </td>
+  <td>
+  <% unless current_user == user%>
+    <a class="ui green button" href="<%=edit_admin_user_path(user)%>">Edit</a>
+    <a class="ui red button" href="<%=admin_user_path(user)%>"  data-method="delete">Delete</a>
+  <%else%>
+    <a class="ui green button" href="<%=edit_admin_user_path(user)%>">Edit</a>
+    <a class="ui disabled red button" href="<%=admin_user_path(user)%>">Delete</a>
+  <%end%>
+  </td>
+
+</tr>
+

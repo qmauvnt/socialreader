@@ -1,0 +1,61 @@
+<% provide(:title, "Review")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_reviews_path%>">Reviews</a>
+  <i class="right chevron icon divider"></i>
+  <div class="active section">Review: <a href="<%=admin_review_path(@review)%>"><%=@review.title[0..20]%>...</a></div>
+</div>
+<div id="container">
+  <h1 class="ui header"><%= @review.title %></h1>
+  <div class="ui message page grid">
+        <p> Posted at <%= @review.published_date.strftime("%d/%m/%Y")%> @ <%=link_to "#{@review.host}",reviews_path(forum: "#{@review.host}")%>.<br>
+        This review has been viewed <%= @review.popular%> times and classified into
+        <%= render 'shared/review_category_tag'%>
+           category by <%=link_to "SocialReader", root_path%>.<br>
+           <% unless @review.host == "socialreader" %>
+        You can also view <%= link_to "source review", @review.url%>.</p>
+          <% end %>
+         <div class="ui form">
+            <%= form_for [:admin,TrainReview.new] do |f|%>
+          <%= f.hidden_field :_id, value: @review.id%>
+            <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
+            <%=f.submit "Add to train data", class: "ui green button"%>
+          <%end%>
+          </div>
+          <div class="ui form">
+            <%= form_for [:admin,TestReview.new] do |f|%>
+          <%= f.hidden_field :_id, value: @review.id%>
+            <%= f.select(:category,Review::CATEGORIES, class: "ui dropdown")%>
+            <%=f.submit "Add to test data", class: "ui red button"%>
+          <%end%>
+          </div>
+
+          <a class="ui primary button" href="<%=new_admin_train_review_path%>">
+            New train data
+          </a>
+</div>
+  <p><%=@review.content.html_safe%></p>
+  <span class="ui tag label">Tags</span>
+  <div class="ui celled horizontal list">
+    <% @review.tag.each do |tag|%>
+      <div class="item"><%=link_to "#{tag}", reviews_path(:tag=> tag)%></div>
+    <% end %>
+  </div>
+
+
+<% if user_signed_in? %>
+  <div class="ui comments">
+    <h3 class="ui dividing header">Comments (<%=@review.comments.count%>)</h3>
+    <%= render @review.comments %>
+    <%= form_for([@review, @comment]) do |f|%>
+    <div class="ui reply form" style="padding-top:20px">
+      <div class="field">
+        <%= f.text_area :content%>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+      </div>
+        <%= f.submit "Add reply", class: "ui green button"%>
+    </div>
+    <% end %>
+  </div>
+  <%end %>

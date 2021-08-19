@@ -1,0 +1,46 @@
+<div class="ui fixed menu" style="margin-bottom: 50px">
+<a class="ui item inverted red button" href="<%=admin_root_path%>">SOCIALREADER
+ admin </a>
+<a class="ui item inverted button" href="<%=admin_train_texts_path%>">Train texts
+  </a>
+  <a class="ui item inverted button" href="<%=admin_train_reviews_path%>">Train reviews
+  </a>
+  <a class="ui item inverted button" href="<%=admin_test_reviews_path%>">Test reviews
+  </a>
+  <a class="ui item inverted button" href="<%=admin_trains_path%>">Train NB model
+  </a>
+  <a class="ui item inverted button" href="<%=admin_reviews_path%>">Reviews
+  </a>
+  <a class="ui item inverted button" href="<%=admin_users_path%>">Users
+  </a>
+  <div class="right menu">
+      <% if user_signed_in? %>
+      <div class="item">
+      <div class="ui transparent icon input">
+        <%= form_tag admin_reviews_path, method: "get" do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
+          <%= submit_tag "Find", :name => nil%>
+        <% end %>
+      </div>
+    </div>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+      <div class="item">
+          <i class="red power icon"></i>
+      </div>
+      <% end %>
+      <% else %>
+        <%= link_to new_user_registration_path do%>
+        <div class="item">
+          <div class="ui primary button">Sign up</div>
+        </div>
+        <% end %>
+        <%= link_to new_user_session_path do%>
+        <div class="item">
+          <div class="ui button">Log-in</div>
+        </div>
+        <% end %>
+      <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/profile_modal' if user_signed_in? %>

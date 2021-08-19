@@ -1,0 +1,6 @@
+  <div class="field">
+    <div class="ui checkbox">
+      <%= f.check_box :just_title, tabindex: "0", class: "hidden"%>
+      <label>Just search in titles</label>
+    </div>
+  </div>

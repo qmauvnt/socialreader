@@ -1,0 +1,26 @@
+<%provide(:title, "Edit #{@user.name}")%>
+<div class="ui three column centered grid">
+  <div class="column">
+    <h2 class="ui two column centered grid">Edit user: <%=@user.name%></h2>
+    <div class="ui form">
+    <%= form_for [:admin,@user] do |f|%>
+
+      <div class="field">
+        <%= f.label :admin %><br />
+       <%= f.select(:admin,[false,true], class: "ui dropdown")  %>
+      </div>
+
+       <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Edit", class: "ui positive button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+

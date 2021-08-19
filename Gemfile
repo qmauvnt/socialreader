@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -18,6 +19,14 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'devise', git: 'https://github.com/gogovan/devise.git', branch: 'rails-5.1'
+gem 'owlcarousel-rails'
+gem "mongoid-paperclip"
+gem 'kaminari'
+gem 'kaminari-mongoid'
+gem 'kaminari-actionview'
+gem 'jquery-ui-rails'
+gem 'ckeditor'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

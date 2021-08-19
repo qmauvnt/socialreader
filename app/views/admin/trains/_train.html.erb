@@ -1,0 +1,81 @@
+<tr>
+  <td><%=train.created_at.strftime("%d/%m/%Y")%><br>
+    <%if train.classified%>
+      <a class="ui red tag label">CLASSIFIED</a>
+    <%else%>
+      <a class="ui tag label">NOT CLASSIFIED</a>
+    <%end%>
+  </td>
+   <td>
+   <table class="ui center aligned very basic collapsing celled table">
+  <thead>
+    <tr>
+    <th></th>
+      <% Review::CATEGORIES.each do |cat|%>
+      <th style="color: <%=type_label_color(cat)%>"><%=cat%></th>
+      <% end %>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>Train data</td>
+    <% Review::CATEGORIES.each do |cat|%>
+      <td><%=train.train_data[cat]%></td>
+      <% end %>
+      <td><%=train.train_data["total"]%></td>
+    </tr>
+    <tr>
+    <td>Test data</td>
+    <% Review::CATEGORIES.each do |cat|%>
+      <td><%=train.test_data[cat]%></td>
+      <% end %>
+      <td><%=train.test_data["total"]%></td>
+    </tr>
+    <tr>
+      <td>Precision</td>
+      <% Review::CATEGORIES.each do |cat|%>
+      <td><%=train.precision[cat]%></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Recall</td>
+      <% Review::CATEGORIES.each do |cat|%>
+      <td><%=train.recall[cat]%></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Fmeasure</td>
+      <% Review::CATEGORIES.each do |cat|%>
+      <td><%=train.fmeasure[cat]%></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+   </td>
+  <td>
+    <table class="ui center aligned very basic collapsing celled table">
+  <thead>
+    <tr>
+      <% Review::CATEGORIES.each do |cat|%>
+      <th style="color: <%=type_label_color(cat)%>"><%=cat%></th>
+      <% end %>
+      <th><- classified as</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%y=0%>
+    <%Review::CATEGORIES.each do |cat|%>
+      <tr>
+        <%0.upto(4) do |x|%>
+        <td><%=train.matrix[x][y]%></td>
+        <%end%>
+        <%y+=1%>
+        <td style="color: <%=type_label_color(cat)%>"><%=cat%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+  </td>
+  <td><%=train.accuracy%>%</td>
+</tr>

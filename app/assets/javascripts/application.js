@@ -11,12 +11,16 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
+//= require owl.carousel
+//= require ckeditor/init
 //= require jquery_ujs
 //= require semantic-ui
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-$('.message .close')
+$( document ).on('turbolinks:load', function() {
+  $('.message .close')
   .on('click', function() {
     $(this)
       .closest('.message')
@@ -24,3 +28,25 @@ $('.message .close')
     ;
   })
 ;
+  var span= document.getElementById("profile")
+  span.onclick = function(){
+    $('.ui.modal').modal('show');
+  }
+
+  $(".owl-carousel").owlCarousel();
+
+  $('.ui.sticky').sticky({
+    context: '#body',
+    pushing: true
+  })
+;
+
+  $('.ui.checkbox').checkbox();
+})
+
+ready = ->
+  $('.ckeditor').each ->
+  CKEDITOR.replace $(this).attr('id')
+
+$(document).ready(ready)
+$(document).on('page:load', ready) } }

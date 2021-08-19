@@ -1,0 +1,63 @@
+<% provide(:title,"Test texts")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_test_reviews_path%>">Test reviews</a>
+  <a href="<%=new_admin_train_review_path%>" class="ui green button">New test reviews</a>
+</div>
+
+<% if @test_reviews.any?%>
+
+<div class="ui top attached tabular menu">
+  <a class="item " data-tab="first">Statistic</a>
+  <a class="item active" data-tab="second">Index</a>
+</div>
+<div class="ui bottom attached tab segment " data-tab="first">
+  <table class="ui very basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Number of reviews</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%Review::CATEGORIES.each do |cat|%>
+      <tr>
+          <td>
+            <span class="ui <%=type_label_color(cat)%> basic label">
+      <%= cat.capitalize%>
+    </span>
+          </td>
+          <td>
+            <%=@test_reviews.by_category(cat).count%>
+          </td>
+      </tr>
+      <%end%>
+    </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th><%=@test_reviews.count%></th>
+        </tr>
+      </tfoot>
+  </table>
+</div>
+<div class="ui bottom attached tab segment active" data-tab="second">
+  <table class="ui very basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Review</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @test_reviews%>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <div class="ui message">
+    There is no test reviews
+  </div>
+<% end %>

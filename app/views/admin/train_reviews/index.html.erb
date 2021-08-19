@@ -1,0 +1,74 @@
+<% provide(:title,"Train data")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_train_reviews_path%>">Train reviews</a>
+  <a href="<%=new_admin_train_review_path%>" class="ui green button">New train reviews</a>
+</div>
+<% if @train_reviews.any?%>
+
+<div class="ui top attached tabular menu">
+  <a class="item " data-tab="first">Statistic</a>
+  <a class="item active" data-tab="second">Index</a>
+</div>
+<div class="ui bottom attached tab segment " data-tab="first">
+  <table class="ui versy basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Number of reviews</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%Review::CATEGORIES.each do |cat|%>
+      <tr>
+          <td>
+            <span class="ui <%=type_label_color(cat)%> basic label">
+      <%= cat.capitalize%>
+    </span>
+          </td>
+          <td>
+            <%=@train_reviews.by_category(cat).count%>
+          </td>
+      </tr>
+      <%end%>
+    </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th><%=@train_reviews.count%></th>
+        </tr>
+      </tfoot>
+  </table>
+</div>
+<div class="ui bottom attached tab segment active" data-tab="second">
+  <table class="ui very basic collapsing celled table">
+    <thead>
+      <tr>
+        <th>Review</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="ui right aligned grid">
+        <div class="left floated left aligned six wide column">
+          <div class="ui segment">
+            <%= paginate @train_reviews %>
+          </div>
+        </div>
+        <div class="right floated right aligned six wide column">
+          <div class="ui segment">
+            <a class="ui left aligned green button" href="<%= new_admin_train_review_path %>"> New training data </a>
+          </div>
+        </div>
+      </div>
+      <%= render @train_reviews%>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <div class="ui message">
+    There is no train reviews
+  </div>
+<% end %>

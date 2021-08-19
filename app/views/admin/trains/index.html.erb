@@ -1,0 +1,55 @@
+<% provide(:title,"NB train models")%>
+<div class="ui huge breadcrumb">
+  <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_trains_path%>">Trains</a>
+</div>
+<div class="ui top attached tabular menu">
+  <a class="item active" data-tab="first">Statistic</a>
+  <a class="item" data-tab="second">Train History</a>
+</div>
+<div class="ui bottom attached tab segment active" data-tab="first">
+  <div class="ui horizontal segments">
+  <%if @lastest_train %>
+  <div class="ui swegment">
+  <div class="ui orange inverted segment">
+    <p>CURRENT MODEL CONFUSION MATRIX
+    (<% if @lastest_train.classified %>
+      CLASSIFIED
+    <%else%>
+      NOT CLASSIFIED
+    <%end%>)</p>
+  </div>
+    <%= render 'confusion_matrix'%>
+    <h1>Accuracy: <%=@lastest_train.accuracy%>%</h1>
+    <% if @lastest_train.classified %>
+      <button class="ui disabled big button">
+        <i class="file icon"></i>
+        Classified
+      </button>
+    <%else%>
+        <h2>Do you want to re-classify ENTIRE THE DATABASE with this model?</h2>
+          <a href="<%=admin_train_path(@lastest_train)%>", data-method="patch" class="ui green big button">CLASSIFY</a>
+    <%end%>
+  </div>
+  <div class="ui segment">
+  <div class="ui tertiary inverted segment">
+    <p>CURRENT MODEL TRAINED DATA SET</p>
+  </div>
+      <%= render 'trained_table' %>
+  </div>
+  <%end%>
+  <div class="ui segment">
+  <div class="ui tertiary inverted red segment">
+    <p>LASTEST TRAIN DATA SET</p>
+  </div>
+      <%= render 'lastest_table' %>
+      <%= form_for [:admin,Train.new] do |f|%>
+        <%= f.submit "Create model", class:"ui red big bottom attached button" %>
+      <%end %>
+  </div>
+</div>
+</div>
+<div class="ui bottom attached tab segment" data-tab="second">
+  <%= render "train_history" %>
+</div>

@@ -1,0 +1,27 @@
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    <%=current_user.name%>
+  </div>
+  <div class="image content">
+    <div class="ui medium image">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjvL7ytJFHYF6diUgxkRl2HittcNmaXQcyxJRDutvA3BZuprIR3ZBKcgno">
+    </div>
+    <div class="description">
+      <div class="ui header">Profile information</div>
+      <p>We've grabbed the following image from the custom avatar file. You can change your avatar after the project deadline (hope so)</p>
+      <p>Email: <%= current_user.email %></p>
+    </div>
+  </div>
+  <div class="actions">
+  <%= link_to user_registration_path, method: :delete do %>
+    <div class="ui black deny button">
+      Nope, cancel my account
+    </div>
+  <% end %>
+    <div class="ui positive right labeled icon button">
+      Ok, good luck with that
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>

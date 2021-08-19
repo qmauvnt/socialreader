@@ -1,0 +1,58 @@
+<%provide(:title, "Test review edit")%>
+<div class="ui huge breadcrumb">
+ <a class="section" href="<%= admin_root_path %>">Home</a>
+  <i class="right chevron icon divider"></i>
+  <a class="section" href="<%=admin_test_reviews_path%>">Test reviews</a>
+  <i class="right chevron icon divider"></i>
+  <div class="active section">Edit: <a href="<%=admin_test_review_path(@test_review)%>"><%=@review.title[0..20]%>...</a></div>
+</div>
+
+<div class="ui big red message">
+  <p class="big red">You have to change the test review</p>
+</div>
+<div id="container">
+  <h1 class="ui header"><%= @review.title %></h1>
+  <div class="ui message page grid">
+        <p> Posted at <%= @review.published_date.strftime("%d/%m/%Y")%> @ <%=link_to "#{@review.host}",reviews_path(forum: "#{@review.host}")%>.<br>
+        This review has been viewed <%= @review.popular%> times and classified into
+         <%=render 'shared/review_category_tag'%>    category by <%=link_to "SocialReader", root_path%>.<br>
+        You can also view <%= link_to "source review", @review.url%>.</p>
+          <div class="row">
+          <div class="eight wide column">
+          <div class="field">
+            <label>This review was tested by admin as:</label>
+          </div>
+          <div class="field">
+              <span class="ui <%=type_label_color(@test_review.category)%> basic label">
+                <%= @test_review.category.capitalize%>
+              </span>
+          </div>
+          </div>
+          <div class="eight wide column">
+           <div class="ui form">
+            <%= form_for [:admin,@test_review] do |f|%>
+            Do you want to change it?
+            <%= f.hidden_field :review, value: @review.review%>
+          <%= f.hidden_field :_id, value: @review.id%>
+            <%= f.select(:category,Review::CATEGORIES-[@test_review.category], class: "ui dropdown")%>
+            <%=f.submit "Update", class: "ui green button"%>
+          <%end%>
+            </div>
+            <div class="row">
+            Train data added @ <%=@test_review.created_at.strftime("%d/%m/%Y")%>
+            <div class="eight wide column">
+          <%= link_to "Delete", admin_test_review_path, method: :delete, data:{confirmation: "Are you sure?"}, class: "ui red button"%>
+            </div>
+          </div>
+            </div>
+          </div>
+          </div>
+  </div>
+  <p><%=@review.content.html_safe%></p>
+  <span class="ui tag label">Tags</span>
+  <div class="ui celled horizontal list">
+    <% @review.tag.each do |tag|%>
+      <div class="item"><%=link_to "#{tag}", reviews_path(:tag=> tag)%></div>
+    <% end %>
+  </div>
+</div>

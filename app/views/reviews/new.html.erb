@@ -1,0 +1,29 @@
+<%provide(:title,"New review")%>
+
+<%= form_for @review do |f|%>
+<div class="ui form">
+  <h4 class="ui dividing header">Information</h4>
+  <div class="field">
+    <label>Title</label>
+      <div class="field">
+        <%= f.text_field :title, placeholder: "Title"%>
+      </div>
+  </div>
+      <%= f.hidden_field :published_date, value: Time.now%>
+      <%= f.hidden_field :popular, value: 1%>
+  <div class="two fields">
+    <div class="field">
+      <label>Category</label>
+       <%= f.select(:category,Review::CATEGORIES,:multiple => true, class: "ui dropdown")  %>
+    </div>
+  </div>
+  <h4 class="ui dividing header">Content</h4>
+  <%= f.cktext_area :content %>
+  <div class="field">
+    <label>Tag</label>
+      <div class="field">
+        <%= f.text_field :tag, placeholder: "Divided by ,"%>
+      </div>
+  </div>
+  <%= f.submit "Post", class: "positive ui button"%>
+<%end%>

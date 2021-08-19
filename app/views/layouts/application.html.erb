@@ -9,8 +9,43 @@
   </head>
 
   <body>
+    <% if current_user&&current_user.admin? %>
+      <%= render "layouts/admin_header"%>
+    <div class="ui internally grid" id="body">
+      <div class="row" >
+      <div class="two wide column" >
+      </div>
+      <div class="twelve wide column" >
+        <%= semantic_flash %>
+        <%= yield %>
+      </div>
+      <div class="two wide column" >
+      </div>
+      </div>
+    </div>
+    <%else%>
     <%= render "layouts/header"%>
-    <%= semantic_flash %>
-    <%= yield %>
+    <div class="ui internally grid" id="body">
+      <div class="row" >
+        <div class="four wide column" >
+          <%unless params[controller]=="devise/registrations"||
+            params[controller]=="devise/sessions"%>
+          <%= render 'layouts/side_bar'%>
+          <%end%>
+        </div>
+        <div class="eleven wide column">
+        <%= semantic_flash %>
+        <%= yield %>
+        </div>
+        <div class="one wide column">
+        </div>
+        <%=render'layouts/footer'%>
+      </div>
+    </div>
+    <%end%>
   </body>
 </html>
+
+<script type="text/javascript">
+    $('.menu .item').tab();
+</script>

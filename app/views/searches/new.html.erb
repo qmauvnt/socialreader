@@ -1,0 +1,44 @@
+<%provide :title, "New search"%>
+<%=form_for @search do |f|%>
+  <div class="ui form">
+  <div class="field">
+    <label>Keyword</label>
+    <%= f.text_field :keyword, placeholder: "Keyword"%>
+  </div>
+
+
+  <div class="field">
+    <label>Host</label>
+    <%= f.select(:host,Review::HOSTS,:multiple => true, class: "ui dropdown", :include_blank => true)  %>
+  </div>
+  <div class="field">
+    <label>Category</label>
+    <%= f.select(:category,Review::CATEGORIES,:multiple => true, class: "ui dropdown", :include_blank => true)  %>
+  </div>
+
+  <div class="field">
+    <label>Posted after</label>
+    <%= f.text_field :published_after, "data-provide" => 'datepicker', class: "datepicker" %>
+  </div>
+
+  <div class="field">
+    <label>Do you want to order the reviews by date?
+    (default by popular)</label>
+    <div class="field">
+    <div class="ui checkbox">
+      <%= f.check_box :ordered_by_date, tabindex: "0"%>
+      <label>by published date</label>
+    </div>
+  </div>
+  </div>
+
+  <br/>
+  <button class="ui button" type="submit">Search</button>
+</div>
+<%end%>
+
+<script type="text/javascript">
+$(function() {
+  $('.datepicker').datepicker({ dateFormat: 'dd M yy' });
+});
+</script>

@@ -1,0 +1,6 @@
+<%if review.category%>
+  <a class="ui large <%=type_label_color(review.category)%> ribbon label" >
+<%=review.category.upcase%></a>
+<%else%>
+  <a class="ui large grey ribbon label">Unclassified</a>
+<%end%>

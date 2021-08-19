@@ -1,0 +1,10 @@
+<%provide(:title,"Clipped reviews")%>
+<% if @user.clipped_reviews.any? %>
+  <% @user.clipped_reviews.each do |id|%>
+    <%= render Review.find id %>
+  <% end %>
+<% else %>
+  <div class="ui bottom attached tab segment active">
+    You did not clip any reviews. Go to <%=link_to "reviews index", reviews_path %>.
+  </div>
+<% end %>

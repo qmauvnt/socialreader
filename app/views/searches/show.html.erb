@@ -1,0 +1,10 @@
+<%provide(:title, "Search results")%>
+<% if @search.reviews.present?%>
+  <%= paginate @reviews %>
+  <%= render @reviews %>
+  <%= paginate @reviews%>
+<%else%>
+  <div class="ui bottom attached tab segment active">
+    Sorry! No result is match with your search
+  </div>
+<%end%>

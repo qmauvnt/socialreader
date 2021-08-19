@@ -1,0 +1,33 @@
+<%provide(:title,"Reviews")%>
+<div class="ui segment">
+<%Review::CATEGORIES.each do |cat|%>
+  <% unless params[:search]%>
+    <a class="ui <%=type_label_color(cat)%> button" href="<%=reviews_path(category: "#{cat}")%>"><%=cat.upcase%></a>
+  <%else%>
+    <a class="ui <%=type_label_color(cat)%> button" href="<%=reviews_path(search: "#{params[:search]}",category: "#{cat}")%>"><%=cat.upcase%></a>
+  <%end%>
+<% end %>
+</div>
+
+<% if @reviews.any?%>
+  <%= paginate(@reviews) %>
+    <%= render @reviews %>
+  <%= paginate(@reviews) %>
+<%else%>
+  <div class="ui bottom attached tab segment active">
+    No result has the term "<%=params[:search]%>". Go to <%= link_to "Advanced search", new_search_path%> for more informations
+  </div>
+<%end%>
+
+<script type="text/javascript">
+    $('.ui.sticky').sticky({
+    context: '#body',
+    pushing: true
+  })
+
+      var sidebar= document.getElementById("push")
+  sidebar.onclick=function(){
+    $('.ui.labeled.icon.sidebar').sidebar('toggle')
+  }
+
+</script>

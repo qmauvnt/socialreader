@@ -1,0 +1,43 @@
+<table class="ui center aligned very basic collapsing celled table">
+  <thead>
+    <tr>
+      <% Review::CATEGORIES.each do |cat|%>
+      <th style="color: <%=type_label_color(cat)%>"><%=cat%></th>
+      <% end %>
+      <th><- classified as</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%y=0%>
+    <%Review::CATEGORIES.each do |cat|%>
+      <tr>
+        <%0.upto(4) do |x|%>
+        <td><%=@lastest_train.matrix[x][y]%></td>
+        <%end%>
+        <%y+=1%>
+        <td style="color: <%=type_label_color(cat)%>"><%=cat%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+
+<table class="ui center aligned very basic collapsing celled table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>Fmeasure</th>
+    </tr>
+  </thead>
+  <tbody>
+     <%Review::CATEGORIES.each do |cat|%>
+      <tr>
+        <td style="color: <%=type_label_color(cat)%>"><%=cat%></td>
+        <td><%=@lastest_train.precision[cat]%></td>
+        <td><%=@lastest_train.recall[cat]%></td>
+        <td><%=@lastest_train.fmeasure[cat]%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
